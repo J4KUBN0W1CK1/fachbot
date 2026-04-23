@@ -104,7 +104,7 @@ h3{margin:0;color:var(--text);font-size:18px;line-height:1.3;letter-spacing:-.02
 .proof-item strong{display:block;font-size:15px;margin-bottom:3px;color:var(--text)}
 .proof-item span{font-size:14px;color:var(--muted);line-height:1.5}
 .hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;padding-top:20px;border-top:1px solid var(--line)}
-.tag{padding:5px 12px;border-radius:999px;background:var(--surface-2);border:1px solid var(--line);font-size:12px;font-weight:700;color:var(--muted)}
+.tag{padding:5px 12px;border-radius:999px;background:var(--surface-2);border:1px solid var(--line-strong);font-size:12px;font-weight:700;color:var(--text)}
 
 /* ── APP / BUILDER ── */
 .app-grid{display:grid;grid-template-columns:1fr 380px;gap:24px;align-items:start}
@@ -112,7 +112,7 @@ h3{margin:0;color:var(--text);font-size:18px;line-height:1.3;letter-spacing:-.02
 .builder-head{margin-bottom:32px}
 .builder-head .section-eyebrow{margin-bottom:6px}
 .builder-head h2{font-size:clamp(22px,2.5vw,30px)}
-.section-eyebrow{font-size:11px;font-weight:700;color:var(--soft);text-transform:uppercase;letter-spacing:.1em;display:block}
+.section-eyebrow{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;display:block}
 .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:24px}
 .section-head p{margin:8px 0 0;font-size:15px;color:var(--muted);max-width:58ch}
 
@@ -192,7 +192,7 @@ textarea{min-height:96px;resize:vertical}
 .pdf-muted{font-size:15px;color:var(--muted);margin:0 0 16px;line-height:1.6}
 .list{margin:0;padding-left:18px}
 .list li{margin:7px 0;font-size:14px;color:var(--muted);line-height:1.5}
-.list-no{color:var(--soft) !important;text-decoration:line-through;opacity:.6}
+.list-no{color:var(--muted) !important;text-decoration:line-through;opacity:.75}
 
 .pdf-preview{background:#fff;color:#17201d;border:1px solid #d8e2de;border-radius:22px;box-shadow:0 24px 64px rgba(15,24,20,.13);overflow:hidden}
 .pdf-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:20px 24px;border-bottom:1px solid #dce6e2}
@@ -228,6 +228,16 @@ textarea{min-height:96px;resize:vertical}
 .pricing-card .list{margin-top:12px}
 .pricing-featured{border-color:var(--primary);box-shadow:var(--shadow-md)}
 .pricing-featured::before{content:"Doporučeno";position:absolute;top:16px;right:18px;padding:3px 9px;border-radius:999px;background:var(--primary-soft);color:var(--primary);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+
+/* Firma karta — odlišení od Free */
+.pricing-firm{
+  background:linear-gradient(135deg,var(--surface-2) 0%,var(--surface) 100%);
+  border-color:var(--line-strong);
+}
+.pricing-firm .pricing-pill{
+  background:var(--primary-soft);
+  color:var(--primary);
+}
 .pricing-card{position:relative}
 .pricing-cta{margin-top:auto;padding-top:16px}
 
@@ -548,10 +558,10 @@ textarea{min-height:96px;resize:vertical}
 }
 .fb-billing-toggle{
   flex:1;padding:10px 12px;
-  border:2px solid var(--border);
+  border:2px solid var(--line);
   border-radius:10px;
   background:transparent;
-  color:var(--fg);
+  color:var(--text);
   font-size:14px;font-weight:600;
   cursor:pointer;
   transition:border-color .15s,background .15s,color .15s;

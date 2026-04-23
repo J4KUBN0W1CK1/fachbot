@@ -495,6 +495,21 @@ if (pricingProBtn) {
   });
 }
 
+// ─── Firma CTA ───────────────────────────────────────────────────
+const firmaCTA = document.getElementById('firmaCTA');
+if (firmaCTA) {
+  firmaCTA.addEventListener('click', () => {
+    const lang = window.FACHBOT_LANG || 'cs';
+    const subjects = { cs: 'Zájem o firemní tarif Fachbot', sk: 'Záujem o firemný tarif Fachbot', pl: 'Zapytanie o plan firmowy Fachbot' };
+    const bodies = {
+      cs: 'Dobrý den,%0A%0Amám zájem o firemní tarif Fachbot.%0A%0APočet uživatelů:%0ANazev firmy:%0ATelefon:%0A%0ADěkuji',
+      sk: 'Dobrý deň,%0A%0Amám záujem o firemný tarif Fachbot.%0A%0APočet používateľov:%0ANázov firmy:%0ATelefón:%0A%0AViac info',
+      pl: 'Dzień dobry,%0A%0AChciałbym dowiedzieć się więcej o planie firmowym Fachbot.%0A%0ALiczba użytkowników:%0ANazwa firmy:%0ATelefon:%0A%0ADziękuję',
+    };
+    window.location.href = `mailto:info@fachbot.com?subject=${subjects[lang] || subjects.cs}&body=${bodies[lang] || bodies.cs}`;
+  });
+}
+
 // ─── Hamburger menu ───────────────────────────────────────────────────────────
 const hamburger  = document.getElementById('hamburger');
 const mobileNav  = document.getElementById('mobileNav');
