@@ -342,8 +342,15 @@ textarea{min-height:96px;resize:vertical}
   .review-card{padding:18px}
 
   /* Mobile sticky CTA */
-  .mobile-sticky{display:block;position:fixed;bottom:0;left:0;right:0;z-index:55;padding:12px 14px;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(12px);border-top:1px solid var(--line)}
+  .mobile-sticky{display:block;position:fixed;bottom:0;left:0;right:0;z-index:55;padding:12px 14px;background:color-mix(in srgb,var(--bg) 96%,transparent);backdrop-filter:blur(16px);border-top:1px solid var(--line)}
   .mobile-sticky .primary-btn{width:100%;font-size:15px;padding:14px}
+  /* Padding aby sticky nepřekrýval obsah */
+  body{padding-bottom:80px}
+  /* Pricing CTA full width */
+  .pricing-cta .primary-btn,
+  .pricing-cta .ghost-btn{width:100%;justify-content:center}
+  /* Hero eyebrow — menší text aby se nevlomil */
+  .eyebrow{font-size:11px;padding:4px 10px}
 }
 
 /* ── VELMI MALÝ MOBIL (< 380px) ── */
