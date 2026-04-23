@@ -357,7 +357,7 @@ Děkuji,</div>
             <li>Méně dohad o ceně a podmínkách.</li>
           </ul>
           <div style="margin-top:24px">
-            <a href="#pricing" class="primary-btn">Vyzkoušet Pro za 249 Kč</a>
+            <button class="primary-btn" onclick="startCheckout(document.getElementById('pricing')?.dataset.billing==='yearly'?'yearly':'monthly')" type="button">Vyzkoušet Pro za 249 Kč</button>
           </div>
         </section>
 
@@ -547,7 +547,7 @@ Děkuji,</div>
               <li>Prioritní podpora</li>
             </ul>
             <div class="pricing-cta">
-              <a href="#app" class="primary-btn">Vyzkoušet Pro</a>
+              <button class="primary-btn" id="pricingProBtn" type="button">Vyzkoušet Pro</button>
             </div>
           </article>
 

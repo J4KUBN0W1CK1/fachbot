@@ -358,7 +358,7 @@ Dziękuję,</div>
             <li>Mniej nieporozumień co do ceny i warunków.</li>
           </ul>
           <div style="margin-top:24px">
-            <a href="#pricing" class="primary-btn">Wypróbuj Pro za 39 zł</a>
+            <button class="primary-btn" onclick="startCheckout(document.getElementById('pricing')?.dataset.billing==='yearly'?'yearly':'monthly')" type="button">Wypróbuj Pro za 39 zł</button>
           </div>
         </section>
 
@@ -525,7 +525,7 @@ Dziękuję,</div>
               <li>Priorytetowe wsparcie</li>
             </ul>
             <div class="pricing-cta">
-              <a href="#app" class="primary-btn">Wypróbuj Pro</a>
+              <button class="primary-btn" id="pricingProBtn" type="button">Wypróbuj Pro</button>
             </div>
           </article>
 

@@ -485,6 +485,15 @@ if (voteUp && voteDown) {
   });
 }
 
+// ─── Pricing CTA ───────────────────────────────────────────────────
+const pricingProBtn = document.getElementById('pricingProBtn');
+if (pricingProBtn) {
+  pricingProBtn.addEventListener('click', () => {
+    const billing = pricingSection?.dataset.billing === 'yearly' ? 'yearly' : 'monthly';
+    startCheckout(billing);
+  });
+}
+
 // ─── Hamburger menu ───────────────────────────────────────────────────────────
 const hamburger  = document.getElementById('hamburger');
 const mobileNav  = document.getElementById('mobileNav');
