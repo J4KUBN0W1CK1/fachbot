@@ -202,10 +202,31 @@ textarea{min-height:124px;resize:vertical}
   box-shadow:0 0 0 2px rgba(185,28,28,.3) !important;
 }
 
+/* Hero trust badges */
+.hero-trust{display:grid;gap:8px;margin-top:16px}
+.trust-badge{padding:9px 14px;border-radius:12px;background:var(--surface-2);border:1px solid var(--line);font-size:13px;font-weight:700;color:var(--text)}
+
+/* Upgrade hint in sidebar */
+.upgrade-hint{margin-top:14px;padding:14px 16px;border-radius:16px;background:var(--primary-soft);border:1px solid color-mix(in srgb,var(--primary) 30%,var(--line))}
+.upgrade-hint strong{display:block;color:var(--primary);margin-bottom:4px;font-size:14px}
+.upgrade-hint span{display:block;color:var(--muted);font-size:13px;margin-bottom:8px}
+.upgrade-link{font-size:13px;font-weight:800;color:var(--primary);text-decoration:underline;text-underline-offset:2px}
+
+/* Social proof section */
+.social-proof{padding-bottom:8px}
+.proof-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.proof-card{padding:22px 20px 20px}
+.proof-icon{font-size:22px;margin-bottom:10px}
+.proof-card h3{margin-bottom:8px;font-size:17px}
+.proof-card p{color:var(--muted);font-size:14px;margin:0}
+
+/* List negative items */
+.list-no{color:var(--soft) !important;text-decoration:line-through;opacity:.7}
+
 .mobile-sticky{display:none}
 
 @media (max-width:1100px){
-  .hero-grid,.app-grid,.pdf-grid,.seo-grid,.trust-row,.flow-grid,.pricing-grid{grid-template-columns:1fr}
+  .hero-grid,.app-grid,.pdf-grid,.seo-grid,.trust-row,.flow-grid,.pricing-grid,.proof-grid{grid-template-columns:1fr}
   .sidebar{position:static}
   .hero-points,.trade-grid,.kpi-row{grid-template-columns:1fr 1fr}
   .pdf-cols{grid-template-columns:1fr}
@@ -214,7 +235,8 @@ textarea{min-height:124px;resize:vertical}
 
 @media (max-width:720px){
   .wrap,.flow-inner{padding:0 14px}
-  .hero-copy,.hero-side,.builder,.card,.pdf-card,.seo-card,.flow-card,.pricing-card{padding:18px}
+  .hero-copy,.hero-side,.builder,.card,.pdf-card,.seo-card,.flow-card,.pricing-card,.proof-card{padding:18px}
+  .proof-grid{grid-template-columns:repeat(2,1fr)}
   .hero{padding-top:24px}
   .situation-grid,.field-grid,.trade-grid,.hero-points,.kpi-row{grid-template-columns:1fr}
   .section-head{display:block}
