@@ -227,7 +227,7 @@ textarea{min-height:96px;resize:vertical}
 .pricing-note{font-size:13px;color:var(--soft);margin-top:4px}
 .pricing-card .list{margin-top:12px}
 .pricing-featured{border-color:var(--primary);box-shadow:var(--shadow-md)}
-.pricing-featured::before{content:"Doporučeno";position:absolute;top:16px;right:18px;padding:3px 9px;border-radius:999px;background:var(--primary-soft);color:var(--primary);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+.pricing-featured::before{content:attr(data-recommended);position:absolute;top:16px;right:18px;padding:3px 9px;border-radius:999px;background:var(--primary-soft);color:var(--primary);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
 
 /* Firma karta — odlišení od Free */
 .pricing-firm{
