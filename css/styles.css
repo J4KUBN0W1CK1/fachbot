@@ -22,22 +22,22 @@
 }
 
 [data-theme="dark"]{
-  --bg:#060909;
-  --surface:#161f1d;
-  --surface-2:#1e2927;
-  --surface-3:#273330;
-  --line:#384542;
-  --line-strong:#526761;
-  --text:#f7faf9;
-  --muted:#c3d2cd;
-  --soft:#9eafa9;
-  --primary:#67c6bd;
-  --primary-strong:#a4e4dd;
-  --primary-soft:#112f2c;
-  --primary-ink:#081210;
-  --shadow-sm:0 2px 12px rgba(0,0,0,.45);
-  --shadow-md:0 14px 36px rgba(0,0,0,.55);
-  --shadow-lg:0 24px 60px rgba(0,0,0,.7);
+  --bg:#070c0b;
+  --surface:#111a18;
+  --surface-2:#182320;
+  --surface-3:#1f2e2a;
+  --line:#2a3835;
+  --line-strong:#3d5550;
+  --text:#eef4f2;
+  --muted:#b8cdc8;
+  --soft:#7d9e98;
+  --primary:#4dbfb5;
+  --primary-strong:#7dd9d2;
+  --primary-soft:#0d2825;
+  --primary-ink:#040e0c;
+  --shadow-sm:0 2px 12px rgba(0,0,0,.6);
+  --shadow-md:0 14px 36px rgba(0,0,0,.7);
+  --shadow-lg:0 24px 60px rgba(0,0,0,.85);
 }
 
 *{box-sizing:border-box}
@@ -260,6 +260,11 @@ textarea{min-height:96px;resize:vertical}
   .pdf-cols{grid-template-columns:1fr}
   .mobile-sticky{display:block;position:sticky;bottom:12px;z-index:55;padding:0 16px 16px}
   .mobile-sticky .primary-btn{width:100%}
+  .top-nav{display:none}
+  .lang-code{display:none}
+  .lang-switch button,.lang-btn{padding:5px 7px}
+  .flag{font-size:18px}
+  .topbar-inner{min-height:56px}
 }
 
 /* ── LANG SWITCH S VLAJKAMI ── */
