@@ -1,5 +1,42 @@
 export const config = { runtime: 'edge' };
 
+const SUPABASE_URL = process.env.SUPABASE_URL;
+const SUPABASE_SECRET_KEY = process.env.SUPABASE_SECRET_KEY;
+
+async function isProUser(email) {
+  if (!email || !SUPABASE_URL || !SUPABASE_SECRET_KEY) return false;
+  try {
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/users?email=eq.${encodeURIComponent(email)}&select=plan,subscription_status`,
+      {
+        headers: {
+          'apikey': SUPABASE_SECRET_KEY,
+          'Authorization': `Bearer ${SUPABASE_SECRET_KEY}`,
+        },
+      }
+    );
+    const data = await res.json();
+    return data?.[0]?.plan === 'pro' && data?.[0]?.subscription_status === 'active';
+  } catch {
+    return false;
+  }
+}
+
+async function logGeneration(email, lang, situation, trade, channel, tone) {
+  if (!SUPABASE_URL || !SUPABASE_SECRET_KEY) return;
+  try {
+    await fetch(`${SUPABASE_URL}/rest/v1/generations`, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_SECRET_KEY,
+        'Authorization': `Bearer ${SUPABASE_SECRET_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email: email || null, lang, situation, trade, channel, tone }),
+    });
+  } catch {}
+}
+
 export default async function handler(req) {
   if (req.method !== 'POST') {
     return new Response(JSON.stringify({ error: 'Method not allowed' }), { status: 405 });
@@ -17,7 +54,7 @@ export default async function handler(req) {
     return new Response(JSON.stringify({ error: 'Invalid JSON' }), { status: 400 });
   }
 
-  const { situation, trade, description, tone, channel, addressMode = 'vy', clientName, clientThing, myName, myCompany, myPhone, myCity, lang = 'cs' } = body;
+  const { situation, trade, description, tone, channel, addressMode = 'vy', clientName, clientThing, myName, myCompany, myPhone, myCity, lang = 'cs', email = '' } = body;
 
   if (!situation || !trade) {
     return new Response(JSON.stringify({ error: 'Missing required fields' }), { status: 400 });
@@ -92,6 +129,9 @@ Napiš hotový text zprávy.`;
 
     const data = await response.json();
     const text = data.choices?.[0]?.message?.content?.trim();
+
+    // Logovat generování do Supabase (async, neblokuje odpověď)
+    logGeneration(email, lang, situation, trade, channel, tone);
 
     return new Response(JSON.stringify({ text }), {
       status: 200,

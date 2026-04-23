@@ -314,6 +314,7 @@ async function runGeneration() {
         myPhone: phone,
         myCity: city,
         lang: window.FACHBOT_LANG || 'cs',
+        email: localStorage.getItem('fb_email') || '',
       }),
     });
 

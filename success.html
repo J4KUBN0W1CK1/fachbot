@@ -13,39 +13,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/styles.css" />
   <style>
-    .success-wrap {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 20px;
-    }
-    .success-card {
-      max-width: 480px;
-      width: 100%;
-      text-align: center;
-      padding: 48px 40px;
-    }
-    .success-icon {
-      font-size: 56px;
-      margin-bottom: 24px;
-    }
-    .success-card h1 {
-      font-size: 1.75rem;
-      font-weight: 800;
-      margin-bottom: 12px;
-      color: var(--fg);
-    }
-    .success-card p {
-      color: var(--fg-muted);
-      font-size: 1rem;
-      line-height: 1.6;
-      margin-bottom: 32px;
-    }
-    .success-card .primary-btn {
-      display: inline-block;
-      text-decoration: none;
-    }
+    .success-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 20px;}
+    .success-card{max-width:480px;width:100%;text-align:center;padding:48px 40px;}
+    .success-icon{font-size:56px;margin-bottom:24px;}
+    .success-card h1{font-size:1.75rem;font-weight:800;margin-bottom:12px;color:var(--fg);}
+    .success-card p{color:var(--fg-muted);font-size:1rem;line-height:1.6;margin-bottom:32px;}
+    .success-card .primary-btn{display:inline-block;text-decoration:none;}
   </style>
 </head>
 <body>
@@ -57,5 +30,16 @@
       <a href="/" class="primary-btn">Zpět na Fachbot</a>
     </div>
   </div>
+  <script>
+    // Uložit Pro status do localStorage (dočasně než bude full auth)
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('session_id')) {
+      localStorage.setItem('fb_pro', '1');
+      localStorage.setItem('fb_pro_ts', Date.now().toString());
+    } else {
+      // Přímý přístup bez session_id → přesměrovat
+      window.location.href = '/';
+    }
+  </script>
 </body>
 </html>
