@@ -570,3 +570,15 @@ button.loading{
 @media(max-width:560px){
   .reviews-grid{ grid-template-columns:1fr; }
 }
+
+.reviews-contact{
+  margin-top:32px;
+  text-align:center;
+  font-size:14px;
+  color:var(--soft);
+}
+.reviews-contact a{
+  color:var(--primary);
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
