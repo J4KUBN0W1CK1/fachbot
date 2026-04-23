@@ -171,10 +171,10 @@ async function startCheckout(billing = 'monthly') {
     if (data.url) {
       window.location.href = data.url;
     } else {
-      alert('Nepodařilo se otevřít platební stránku. Napiš nám na info@fachbot.com.');
+      alert('Chyba: ' + (data.error || 'neznámá chyba'));
     }
-  } catch {
-    alert('Nepodařilo se otevřít platební stránku. Napiš nám na info@fachbot.com.');
+  } catch (e) {
+    alert('Fetch chyba: ' + e.message);
   }
 }
 
