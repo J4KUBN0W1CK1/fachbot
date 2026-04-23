@@ -334,3 +334,22 @@ mailBtn?.addEventListener('click', () => {
   const body    = encodeURIComponent(resultBox.textContent);
   window.location.href = `mailto:${mail}?subject=${subject}&body=${body}`;
 });
+
+// ─── Billing toggle ───────────────────────────────────────────────────────────
+const billMonthly    = document.getElementById('billMonthly');
+const billYearly     = document.getElementById('billYearly');
+const pricingSection = document.getElementById('pricing');
+
+if (billMonthly && billYearly && pricingSection) {
+  billMonthly.addEventListener('click', () => {
+    pricingSection.dataset.billing = 'monthly';
+    billMonthly.classList.add('active');
+    billYearly.classList.remove('active');
+  });
+
+  billYearly.addEventListener('click', () => {
+    pricingSection.dataset.billing = 'yearly';
+    billYearly.classList.add('active');
+    billMonthly.classList.remove('active');
+  });
+}

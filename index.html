@@ -370,6 +370,12 @@ Děkuji,</div>
           </div>
           <p class="pricing-note-top">Bez závazků · kdykoli zrušíš</p>
         </div>
+
+        <!-- Billing toggle -->
+        <div class="billing-toggle" role="group" aria-label="Frekvence platby">
+          <button class="billing-btn active" id="billMonthly" type="button">Měsíčně</button>
+          <button class="billing-btn" id="billYearly" type="button">Ročně <span class="billing-badge">−2 měsíce</span></button>
+        </div>
         <div class="pricing-grid">
           <article class="panel pricing-card" id="plan-free">
             <div class="pricing-pill">Zdarma</div>
@@ -391,8 +397,12 @@ Děkuji,</div>
           <article class="panel pricing-card pricing-featured" id="plan-pro">
             <div class="pricing-pill">Nejpopulárnější</div>
             <h3>Pro</h3>
-            <p class="pricing-price">249 Kč <span class="pricing-per">/ měsíc</span></p>
-            <p class="pricing-note">Pro řemeslníky, kteří píšou zákazníkům každý týden.</p>
+            <p class="pricing-price">
+              <span class="price-monthly">249 Kč <span class="pricing-per">/ měsíc</span></span>
+              <span class="price-yearly" hidden>2 490 Kč <span class="pricing-per">/ rok</span></span>
+            </p>
+            <p class="pricing-note pricing-note-monthly">Pro řemeslníky, kteří píšou zákazníkům každý týden.</p>
+            <p class="pricing-note pricing-note-yearly" hidden>Ušetříš 498 Kč oproti měsíčnímu placení.</p>
             <ul class="list">
               <li>Vše z Free</li>
               <li>Prémiové PDF nabídky</li>
