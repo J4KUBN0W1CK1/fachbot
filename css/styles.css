@@ -542,6 +542,26 @@ textarea{min-height:96px;resize:vertical}
   text-align:left;
   display:inline-block;
 }
+.fb-paywall-billing{
+  display:flex;gap:8px;justify-content:center;
+  margin:0 0 20px;
+}
+.fb-billing-toggle{
+  flex:1;padding:10px 12px;
+  border:2px solid var(--border);
+  border-radius:10px;
+  background:transparent;
+  color:var(--fg);
+  font-size:14px;font-weight:600;
+  cursor:pointer;
+  transition:border-color .15s,background .15s,color .15s;
+}
+.fb-billing-toggle.active{
+  border-color:var(--primary);
+  background:var(--primary);
+  color:#fff;
+}
+
 .fb-paywall-perks li{
   font-size:14px;color:var(--muted);
   padding:3px 0;

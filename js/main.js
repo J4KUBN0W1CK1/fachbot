@@ -156,38 +156,108 @@ function createEmailModal() {
   });
 }
 
+// ─── Stripe checkout helper ───────────────────────────────────────────────────
+async function startCheckout(billing = 'monthly') {
+  const lang  = window.FACHBOT_LANG || 'cs';
+  const email = localStorage.getItem('fb_email') || '';
+
+  try {
+    const resp = await fetch('/api/checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ lang, billing, email }),
+    });
+    const data = await resp.json();
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      alert('Nepodařilo se otevřít platební stránku. Napiš nám na info@fachbot.com.');
+    }
+  } catch {
+    alert('Nepodařilo se otevřít platební stránku. Napiš nám na info@fachbot.com.');
+  }
+}
+
 function showPaywall() {
+  const lang = window.FACHBOT_LANG || 'cs';
+
+  // Texty podle jazyka
+  const t = {
+    cs: {
+      title: 'Vyčerpal jsi volná generování',
+      desc:  'S Fachbot Pro máš neomezená generování, PDF nabídky a vlastní hlavičku.',
+      monthly: '249 Kč / měsíc',
+      yearly:  '2 490 Kč / rok',
+      ctaMonthly: 'Přejít na Pro — 249 Kč/měsíc',
+      ctaYearly:  'Přejít na Pro — 2 490 Kč/rok',
+      close: 'Zavřít',
+    },
+    sk: {
+      title: 'Vyčerpal si voľné generovanie',
+      desc:  'S Fachbot Pro máš neobmedzené generovanie, PDF ponuky a vlastnú hlavičku.',
+      monthly: '9,99 € / mesiac',
+      yearly:  '99 € / rok',
+      ctaMonthly: 'Prejsť na Pro — 9,99 €/mesiac',
+      ctaYearly:  'Prejsť na Pro — 99 €/rok',
+      close: 'Zatvoriť',
+    },
+    pl: {
+      title: 'Wykorzystałeś darmowe generowania',
+      desc:  'Z Fachbot Pro masz nieograniczone generowanie, oferty PDF i własny nagłówek.',
+      monthly: '39 zł / miesiąc',
+      yearly:  '390 zł / rok',
+      ctaMonthly: 'Przejdź na Pro — 39 zł/miesiąc',
+      ctaYearly:  'Przejdź na Pro — 390 zł/rok',
+      close: 'Zamknij',
+    },
+  };
+  const tx = t[lang] || t.cs;
+
   const overlay = document.createElement('div');
   overlay.className = 'fb-modal-overlay';
   overlay.innerHTML = `
     <div class="fb-modal" role="dialog" aria-modal="true" aria-labelledby="fb-paywall-title">
       <div class="fb-modal-icon">🔒</div>
-      <h2 id="fb-paywall-title">Vyčerpal jsi volná generování</h2>
-      <p>S Fachbot Pro máš neomezená generování, PDF nabídky a vlastní hlavičku.</p>
-      <div class="fb-paywall-price">
-        <span class="fb-price-amount">249 Kč</span>
-        <span class="fb-price-period">&nbsp;/ měsíc</span>
-      </div>
+      <h2 id="fb-paywall-title">${tx.title}</h2>
+      <p>${tx.desc}</p>
       <ul class="fb-paywall-perks">
         <li>✓ Neomezená generování</li>
         <li>✓ PDF nabídky s tvojí hlavičkou</li>
         <li>✓ Vlastní šablony</li>
         <li>✓ Historie zpráv</li>
       </ul>
-      <button class="fb-modal-btn" id="fb-paywall-cta">Přejít na Pro — 249 Kč/měsíc</button>
-      <button class="fb-modal-skip" id="fb-paywall-close">Zavřít</button>
+      <div class="fb-paywall-billing">
+        <button class="fb-billing-toggle active" id="pw-monthly" type="button">${tx.monthly}</button>
+        <button class="fb-billing-toggle" id="pw-yearly" type="button">${tx.yearly}</button>
+      </div>
+      <button class="fb-modal-btn" id="fb-paywall-cta">${tx.ctaMonthly}</button>
+      <button class="fb-modal-skip" id="fb-paywall-close">${tx.close}</button>
     </div>
   `;
   document.body.appendChild(overlay);
   requestAnimationFrame(() => overlay.classList.add('visible'));
 
-  const cta   = overlay.querySelector('#fb-paywall-cta');
-  const close = overlay.querySelector('#fb-paywall-close');
+  const cta        = overlay.querySelector('#fb-paywall-cta');
+  const close      = overlay.querySelector('#fb-paywall-close');
+  const pwMonthly  = overlay.querySelector('#pw-monthly');
+  const pwYearly   = overlay.querySelector('#pw-yearly');
+  let billing = 'monthly';
 
-  // TODO: nahradit za Stripe checkout link až bude platební brána
-  cta.addEventListener('click', () => {
-    alert('Platební brána bude brzy k dispozici. Napiš nám na info@fachbot.com.');
+  pwMonthly.addEventListener('click', () => {
+    billing = 'monthly';
+    pwMonthly.classList.add('active');
+    pwYearly.classList.remove('active');
+    cta.textContent = tx.ctaMonthly;
   });
+
+  pwYearly.addEventListener('click', () => {
+    billing = 'yearly';
+    pwYearly.classList.add('active');
+    pwMonthly.classList.remove('active');
+    cta.textContent = tx.ctaYearly;
+  });
+
+  cta.addEventListener('click', () => startCheckout(billing));
 
   close.addEventListener('click', () => {
     overlay.classList.remove('visible');
