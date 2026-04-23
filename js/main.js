@@ -1,3 +1,105 @@
+// ─── i18n ───────────────────────────────────────────────────────────────────
+const LANG = window.FACHBOT_LANG || 'cs';
+const i18n = {
+  cs: {
+    showMoreTrades:      '+ Zobrazit více profesí',
+    hideTrades:          '− Skrýt',
+    showMoreSituations:  '+ Zobrazit další situace',
+    hideSituations:      '− Skrýt',
+    generating:          'Generuji…',
+    generateBtn:         'Vygenerovat zprávu',
+    serverError:         'Chyba serveru',
+    noResult:            '— žádný výsledek —',
+    errorPrefix:         'Něco se pokazilo',
+    errorRetry:          'Zkus to prosím znovu.',
+    copied:              'Zkopírováno',
+    copy:                'Kopírovat',
+    cannotCopy:          'Nelze kopírovat',
+    waPlaceholder:       'Doplň telefon pro WhatsApp',
+    emailModalTitle:     'Ještě 2 generování zdarma',
+    emailModalDesc:      'Zadej email a získáš 2 generování navíc — bez nutnosti platit.',
+    emailPlaceholder:    'tvuj@email.cz',
+    emailHint:           'Bez spamu. Email využijeme jen pro přístup k Fachbotu.',
+    emailSubmit:         'Získat 2 generování zdarma',
+    emailSkip:           'Přejít na Pro verzi →',
+    paywallPerk1:        'Neomezená generování',
+    paywallPerk2:        'PDF nabídky s tvojí hlavičkou',
+    paywallPerk3:        'Vlastní šablony',
+    paywallPerk4:        'Historie zpráv',
+    feedbackUp:          'Super, díky! 🙌',
+    feedbackDown:        'Díky! Zaznamenáno.',
+    checkoutError:       'Chyba',
+    checkoutFetchError:  'Chyba připojení',
+    resetText:           'Dobrý den pane Nováku,\n\nozývám se k vaší poptávce. Mohl bych vám nabídnout termín v úterý odpoledne nebo ve středu dopoledne.\n\nPokud vám bude jeden z termínů sedět, rovnou ho potvrdíme. Když budete chtít, pošlu i stručnou cenovou nabídku.\n\nDěkuji,',
+    resetChannel:        'SMS',
+  },
+  sk: {
+    showMoreTrades:      '+ Zobraziť viac profesií',
+    hideTrades:          '− Skryť',
+    showMoreSituations:  '+ Zobraziť ďalšie situácie',
+    hideSituations:      '− Skryť',
+    generating:          'Generujem…',
+    generateBtn:         'Pripraviť text',
+    serverError:         'Chyba servera',
+    noResult:            '— žiadny výsledok —',
+    errorPrefix:         'Niečo sa pokazilo',
+    errorRetry:          'Skús to prosím znova.',
+    copied:              'Skopírované',
+    copy:                'Kopírovať',
+    cannotCopy:          'Nedá sa kopírovať',
+    waPlaceholder:       'Doplň telefón pre WhatsApp',
+    emailModalTitle:     'Ešte 2 generovania zadarmo',
+    emailModalDesc:      'Zadaj email a získaš 2 generovania navyše — bez platenia.',
+    emailPlaceholder:    'tvoj@email.sk',
+    emailHint:           'Bez spamu. Email použijeme len pre prístup k Fachbotu.',
+    emailSubmit:         'Získať 2 generovania zadarmo',
+    emailSkip:           'Prejsť na Pro verziu →',
+    paywallPerk1:        'Neobmedzené generovanie',
+    paywallPerk2:        'PDF ponuky s tvojou hlavičkou',
+    paywallPerk3:        'Vlastné šablóny',
+    paywallPerk4:        'História správ',
+    feedbackUp:          'Super, ďakujem! 🙌',
+    feedbackDown:        'Ďakujem! Zaznamenané.',
+    checkoutError:       'Chyba',
+    checkoutFetchError:  'Chyba pripojenia',
+    resetText:           'Dobrý deň pán Novák,\n\nozývam sa k vašej dopyte. Mohol by som vám ponúknuť termín v utorok popoludní alebo v stredu dopoludnia.\n\nAk vám niektorý termín vyhovuje, hneď ho potvrdíme. Ak budete chcieť, pošlem aj stručnú cenovú ponuku.\n\nĎakujem,',
+    resetChannel:        'SMS',
+  },
+  pl: {
+    showMoreTrades:      '+ Pokaż więcej zawodów',
+    hideTrades:          '− Ukryj',
+    showMoreSituations:  '+ Pokaż więcej sytuacji',
+    hideSituations:      '− Ukryj',
+    generating:          'Generuję…',
+    generateBtn:         'Przygotuj tekst',
+    serverError:         'Błąd serwera',
+    noResult:            '— brak wyniku —',
+    errorPrefix:         'Coś poszło nie tak',
+    errorRetry:          'Spróbuj ponownie.',
+    copied:              'Skopiowano',
+    copy:                'Kopiuj',
+    cannotCopy:          'Nie można skopiować',
+    waPlaceholder:       'Podaj telefon do WhatsApp',
+    emailModalTitle:     'Jeszcze 2 generowania za darmo',
+    emailModalDesc:      'Podaj email i dostaniesz 2 dodatkowe generowania — bez płacenia.',
+    emailPlaceholder:    'twoj@email.pl',
+    emailHint:           'Bez spamu. Użyjemy emaila tylko do dostępu do Fachbota.',
+    emailSubmit:         'Zdobadź 2 generowania za darmo',
+    emailSkip:           'Przejdź do wersji Pro →',
+    paywallPerk1:        'Nieograniczone generowania',
+    paywallPerk2:        'Oferty PDF z twoim nagłówkiem',
+    paywallPerk3:        'Własne szablony',
+    paywallPerk4:        'Historia wiadomości',
+    feedbackUp:          'Super, dzięki! 🙌',
+    feedbackDown:        'Dzięki! Zapisane.',
+    checkoutError:       'Błąd',
+    checkoutFetchError:  'Błąd połączenia',
+    resetText:           'Dzień dobry Panie Nowak,\n\nodzywam się w sprawie Pana zapytania. Mogę zaproponować termin we wtorek po południu lub w środę przed południem.\n\nJeśli któryś termin Panu odpowiada, od razu go potwierdzimy. Jeśli chce Pan, mogę też przesłać krótką wycenę.\n\nDziękuję,',
+    resetChannel:        'SMS',
+  },
+};
+const t = i18n[LANG] || i18n.cs;
+
 // ─── DOM refs ────────────────────────────────────────────────────────────────
 const html             = document.documentElement;
 const themeToggle      = document.getElementById('themeToggle');
@@ -67,8 +169,8 @@ if (showMoreBtn && tradeGridExtra) {
   showMoreBtn.addEventListener('click', () => {
     tradeGridExtra.classList.toggle('hidden');
     showMoreBtn.textContent = tradeGridExtra.classList.contains('hidden')
-      ? '+ Zobrazit více profesí'
-      : '− Skrýt';
+      ? t.showMoreTrades
+      : t.hideTrades;
     tradeGridExtra.querySelectorAll('.trade-pill').forEach(btn =>
       btn.addEventListener('click', () => {
         document.querySelectorAll('.trade-pill').forEach(x => x.classList.remove('active'));
@@ -129,12 +231,12 @@ function createEmailModal() {
   overlay.innerHTML = `
     <div class="fb-modal" role="dialog" aria-modal="true" aria-labelledby="fb-modal-title">
       <div class="fb-modal-icon">✉️</div>
-      <h2 id="fb-modal-title">Ještě 2 generování zdarma</h2>
-      <p>Zadej email a získáš 2 generování navíc — bez nutnosti platit.</p>
-      <input type="email" id="fb-email-input" placeholder="tvuj@email.cz" autocomplete="email" />
-      <p class="fb-modal-hint">Bez spamu. Email využijeme jen pro přístup k Fachbotu.</p>
-      <button class="fb-modal-btn" id="fb-email-submit">Získat 2 generování zdarma</button>
-      <button class="fb-modal-skip" id="fb-email-skip">Přejít na Pro verzi →</button>
+      <h2 id="fb-modal-title">${t.emailModalTitle}</h2>
+      <p>${t.emailModalDesc}</p>
+      <input type="email" id="fb-email-input" placeholder="${t.emailPlaceholder}" autocomplete="email" />
+      <p class="fb-modal-hint">${t.emailHint}</p>
+      <button class="fb-modal-btn" id="fb-email-submit">${t.emailSubmit}</button>
+      <button class="fb-modal-skip" id="fb-email-skip">${t.emailSkip}</button>
     </div>
   `;
   document.body.appendChild(overlay);
@@ -185,10 +287,10 @@ async function startCheckout(billing = 'monthly') {
     if (data.url) {
       window.location.href = data.url;
     } else {
-      alert('Chyba: ' + (data.error || 'neznámá chyba'));
+      alert(t.checkoutError + ': ' + (data.error || '?'));
     }
   } catch (e) {
-    alert('Fetch chyba: ' + e.message);
+    alert(t.checkoutFetchError + ': ' + e.message);
   }
 }
 
@@ -235,10 +337,10 @@ function showPaywall() {
       <h2 id="fb-paywall-title">${tx.title}</h2>
       <p>${tx.desc}</p>
       <ul class="fb-paywall-perks">
-        <li>✓ Neomezená generování</li>
-        <li>✓ PDF nabídky s tvojí hlavičkou</li>
-        <li>✓ Vlastní šablony</li>
-        <li>✓ Historie zpráv</li>
+        <li>✓ ${t.paywallPerk1}</li>
+        <li>✓ ${t.paywallPerk2}</li>
+        <li>✓ ${t.paywallPerk3}</li>
+        <li>✓ ${t.paywallPerk4}</li>
       </ul>
       <div class="fb-paywall-billing">
         <button class="fb-billing-toggle active" id="pw-monthly" type="button">${tx.monthly}</button>
@@ -285,7 +387,7 @@ function setLoading(isLoading) {
   btns.forEach(btn => {
     btn.disabled = isLoading;
     btn.classList.toggle('loading', isLoading);
-    btn.textContent = isLoading ? 'Generuji…' : 'Vygenerovat zprávu';
+    btn.textContent = isLoading ? t.generating : t.generateBtn;
   });
   if (regenBtn) {
     regenBtn.disabled = isLoading;
@@ -334,14 +436,14 @@ async function runGeneration() {
 
     if (!resp.ok) {
       const err = await resp.json().catch(() => ({}));
-      throw new Error(err.error || `Chyba serveru (${resp.status})`);
+      throw new Error(err.error || `${t.serverError} (${resp.status})`);
     }
 
     const data = await resp.json();
-    resultBox.textContent = data.text || '— žádný výsledek —';
+    resultBox.textContent = data.text || t.noResult;
     incrementCount();
   } catch (err) {
-    resultBox.textContent = `Něco se pokazilo: ${err.message}\n\nZkus to prosím znovu.`;
+    resultBox.textContent = `${t.errorPrefix}: ${err.message}\n\n${t.errorRetry}`;
   } finally {
     setLoading(false);
   }
@@ -383,18 +485,18 @@ resetBtn?.addEventListener('click', () => {
   channel.selectedIndex = 0;
   metaChannel.textContent = channel.value;
 
-  resultBox.textContent = `Dobrý den pane Nováku,\n\nozývám se k vaší poptávce. Mohl bych vám nabídnout termín v úterý odpoledne nebo ve středu dopoledne.\n\nPokud vám bude jeden z termínů sedět, rovnou ho potvrdíme. Když budete chtít, pošlu i stručnou cenovou nabídku.\n\nDěkuji,`;
+  resultBox.textContent = t.resetText;
 });
 
 // ─── Copy ─────────────────────────────────────────────────────────────────────
 copyBtn?.addEventListener('click', async () => {
   try {
     await navigator.clipboard.writeText(resultBox.textContent);
-    copyBtn.textContent = 'Zkopírováno';
-    setTimeout(() => { copyBtn.textContent = 'Kopírovat'; }, 1200);
+    copyBtn.textContent = t.copied;
+    setTimeout(() => { copyBtn.textContent = t.copy; }, 1200);
   } catch {
-    copyBtn.textContent = 'Nelze kopírovat';
-    setTimeout(() => { copyBtn.textContent = 'Kopírovat'; }, 1200);
+    copyBtn.textContent = t.cannotCopy;
+    setTimeout(() => { copyBtn.textContent = t.copy; }, 1200);
   }
 });
 
@@ -405,7 +507,7 @@ waBtn?.addEventListener('click', () => {
 
   if (!ph) {
     clientPhone.focus();
-    clientPhone.placeholder = 'Doplň telefon pro WhatsApp';
+    clientPhone.placeholder = t.waPlaceholder;
     clientPhone.classList.add('field-error');
     setTimeout(() => clientPhone.classList.remove('field-error'), 1500);
     return;
@@ -450,8 +552,8 @@ if (showMoreSituations && situationGridExtra) {
   showMoreSituations.addEventListener('click', () => {
     situationGridExtra.classList.toggle('hidden');
     showMoreSituations.textContent = situationGridExtra.classList.contains('hidden')
-      ? '+ Zobrazit další situace'
-      : '− Skrýt';
+      ? t.showMoreSituations
+      : t.hideSituations;
     situationGridExtra.querySelectorAll('.situation').forEach(btn =>
       btn.addEventListener('click', () => {
         document.querySelectorAll('.situation').forEach(x => x.classList.remove('active'));
@@ -489,7 +591,7 @@ if (voteUp && voteDown) {
     if (feedbackComment) feedbackComment.style.display = 'none';
     if (feedbackThanks) {
       feedbackThanks.style.display = 'block';
-      feedbackThanks.textContent = 'Super, díky! 🙌';
+      feedbackThanks.textContent = t.feedbackUp;
     }
     sendFeedback('up');
   });
@@ -507,7 +609,7 @@ if (voteUp && voteDown) {
     if (feedbackComment) feedbackComment.style.display = 'none';
     if (feedbackThanks) {
       feedbackThanks.style.display = 'block';
-      feedbackThanks.textContent = 'Díky! Zaznamenáno.';
+      feedbackThanks.textContent = t.feedbackDown;
     }
   });
 }

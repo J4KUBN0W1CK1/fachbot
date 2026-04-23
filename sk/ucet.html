@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="sk" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Môj účet – Fachbot</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#0f766e" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css" />
+  <style>
+    .account-wrap { max-width: 760px; margin: 0 auto; padding: 0 24px 80px; }
+    .account-hero { padding: 40px 0 32px; }
+    .account-hero h1 { font-size: clamp(24px, 3vw, 32px); margin: 0 0 6px; }
+    .account-hero p { color: var(--muted); font-size: 15px; margin: 0; }
+
+    .account-section { margin-bottom: 24px; }
+    .account-section-title {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .08em; color: var(--muted);
+      margin: 0 0 12px;
+    }
+
+    /* Status bar */
+    .plan-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 12px; padding: 18px 22px;
+      flex-wrap: wrap;
+    }
+    .plan-bar-left { display: flex; align-items: center; gap: 12px; }
+    .plan-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--primary); flex-shrink: 0;
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 20%, transparent);
+    }
+    .plan-dot.inactive { background: var(--muted); box-shadow: none; }
+    .plan-name { font-weight: 700; font-size: 15px; }
+    .plan-detail { font-size: 13px; color: var(--muted); margin-top: 2px; }
+    .plan-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    /* Profil form */
+    .profile-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+      padding: 22px 22px 0;
+    }
+    .profile-grid .field.full { grid-column: 1 / -1; }
+    .profile-actions { padding: 16px 22px 22px; display: flex; gap: 10px; align-items: center; }
+    .save-status { font-size: 13px; color: var(--primary); font-weight: 600; display: none; }
+
+    /* Preference row */
+    .pref-row {
+      padding: 16px 22px; display: flex; gap: 14px; flex-wrap: wrap;
+      border-top: 1px solid var(--line);
+    }
+    .pref-row .field { flex: 1; min-width: 140px; }
+
+    /* Historie */
+    .history-list { display: flex; flex-direction: column; gap: 0; }
+    .history-item {
+      padding: 16px 20px; border-bottom: 1px solid var(--line);
+      display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: start;
+    }
+    .history-item:last-child { border-bottom: 0; }
+    .history-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 6px; }
+    .history-tag {
+      font-size: 11px; font-weight: 700; padding: 2px 8px;
+      border-radius: 999px; background: var(--surface-2);
+      border: 1px solid var(--line); color: var(--muted);
+    }
+    .history-date { font-size: 11px; color: var(--soft); }
+    .history-text {
+      font-size: 13px; color: var(--text); line-height: 1.55;
+      white-space: pre-wrap;
+      max-height: 72px; overflow: hidden;
+      mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    }
+    .history-text.expanded {
+      max-height: none;
+      mask-image: none;
+      -webkit-mask-image: none;
+    }
+    .history-actions { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; }
+    .copy-hist-btn {
+      padding: 6px 12px; font-size: 12px; font-weight: 700;
+      border: 1px solid var(--line); border-radius: 8px;
+      background: var(--surface); color: var(--text); cursor: pointer;
+      white-space: nowrap;
+      transition: border-color .15s;
+    }
+    .copy-hist-btn:hover { border-color: var(--primary); color: var(--primary); }
+    .expand-btn {
+      font-size: 11px; color: var(--primary); background: none; border: none;
+      cursor: pointer; font-weight: 600; padding: 0; white-space: nowrap;
+      text-decoration: underline; text-underline-offset: 2px;
+    }
+
+    .history-empty {
+      padding: 40px 22px; text-align: center;
+      color: var(--muted); font-size: 14px;
+    }
+
+    /* Loading skeleton */
+    .skeleton {
+      background: var(--surface-2); border-radius: 8px;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.5} }
+    .sk-line { height: 14px; margin-bottom: 8px; }
+    .sk-short { width: 40%; }
+    .sk-med { width: 65%; }
+    .sk-long { width: 90%; }
+
+    /* Not logged in state */
+    .no-email {
+      padding: 60px 24px; text-align: center; max-width: 400px; margin: 0 auto;
+    }
+    .no-email h2 { font-size: 20px; margin: 0 0 12px; }
+    .no-email p { color: var(--muted); font-size: 14px; margin: 0 0 24px; line-height: 1.6; }
+    .no-email input[type="email"] {
+      width: 100%; padding: 12px 16px; border-radius: 12px;
+      border: 1.5px solid var(--line); background: var(--surface-2);
+      color: var(--text); font-size: 15px; margin-bottom: 10px;
+    }
+    .no-email input:focus { outline: none; border-color: var(--primary); }
+
+    @media(max-width:600px){
+      .profile-grid { grid-template-columns: 1fr; }
+      .plan-bar { flex-direction: column; align-items: flex-start; }
+      .history-item { grid-template-columns: 1fr; }
+      .history-actions { flex-direction: row; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="/sk/" aria-label="Fachbot – zpět na hlavní stránku">
+        <div class="logo">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M8 25V7"/><path d="M8 7h15"/><path d="M8 16h10"/>
+            <path d="M17 7h3.3c2.95 0 5.2 2 5.2 4.6 0 2.07-1.42 3.81-3.5 4.48"/>
+            <path d="M17 16h4.1c2.9 0 5.2 1.96 5.2 4.5S24 25 21.1 25H17"/>
+          </svg>
+        </div>
+        <span>Fachbot</span>
+      </a>
+      <div class="top-actions">
+        <a href="/sk/" class="ghost-btn" style="font-size:13px;padding:8px 14px;min-height:36px;">← Späť do aplikácie</a>
+        <button class="theme-btn" id="themeToggle" type="button" aria-label="Přepnout režim">◐</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="account-wrap">
+
+      <!-- Not logged in -->
+      <div id="noEmailState" style="display:none">
+        <div class="no-email">
+          <div style="font-size:40px;margin-bottom:16px">🔑</div>
+          <h2>Zadaj svoj email</h2>
+          <p>Zadaj email, s ktorým si si obstaral Pro tarif. Zobrazíme tvoj účet a históriu.</p>
+          <input type="email" id="emailInput" placeholder="tvoj@email.sk" autocomplete="email" />
+          <button class="primary-btn" id="emailSubmit" style="width:100%">Zobraziť účet</button>
+        </div>
+      </div>
+
+      <!-- Account content -->
+      <div id="accountContent" style="display:none">
+        <div class="account-hero">
+          <div class="section-eyebrow" style="margin-bottom:8px">Môj účet</div>
+          <h1 id="greetingName">Dobrý den</h1>
+          <p id="greetingEmail" style="color:var(--muted);font-size:14px"></p>
+        </div>
+
+        <!-- Stav tarifu -->
+        <div class="account-section">
+          <p class="account-section-title">Tarif</p>
+          <div class="panel plan-bar">
+            <div class="plan-bar-left">
+              <div class="plan-dot" id="planDot"></div>
+              <div>
+                <div class="plan-name" id="planName">Načítavam…</div>
+                <div class="plan-detail" id="planDetail"></div>
+              </div>
+            </div>
+            <div class="plan-actions">
+              <button class="ghost-btn" id="manageBtn" style="font-size:13px;padding:9px 16px;min-height:38px;" type="button">
+                Spravovať predplatné
+              </button>
+              <a href="/sk/#pricing" class="primary-btn" id="upgradeBtn" style="font-size:13px;padding:9px 16px;min-height:38px;display:none">
+                Prejsť na Pro
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Profil -->
+        <div class="account-section">
+          <p class="account-section-title">Moje údaje</p>
+          <div class="panel">
+            <div class="profile-grid">
+              <div class="field">
+                <label for="profName">Jméno</label>
+                <input id="profName" placeholder="Peter Novák" />
+              </div>
+              <div class="field">
+                <label for="profCompany">Firma</label>
+                <input id="profCompany" placeholder="Novák Inštalatérstvo" />
+              </div>
+              <div class="field">
+                <label for="profPhone">Telefon</label>
+                <input id="profPhone" placeholder="+421 9xx xxx xxx" />
+              </div>
+              <div class="field">
+                <label for="profCity">Město / region</label>
+                <input id="profCity" placeholder="Košice a okolie" />
+              </div>
+            </div>
+            <div class="pref-row">
+              <div class="field">
+                <label for="profTone">Predvolený štýl</label>
+                <select id="profTone">
+                  <option value="Prirodzený">Prirodzený</option>
+                  <option value="Formálny">Formálny</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="profAddress">Predvolené oslovenie</label>
+                <select id="profAddress">
+                  <option value="vy">Vykanie</option>
+                  <option value="ty">Tykanie</option>
+                </select>
+              </div>
+            </div>
+            <div class="profile-actions">
+              <button class="primary-btn" id="saveProfileBtn" type="button" style="font-size:14px;padding:10px 20px">Uložiť</button>
+              <span class="save-status" id="saveStatus">✓ Uložené</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Historie -->
+        <div class="account-section">
+          <p class="account-section-title">História generovania</p>
+          <div class="panel">
+            <div id="historyLoading" style="padding:24px 20px">
+              <div class="skeleton sk-line sk-short"></div>
+              <div class="skeleton sk-line sk-long"></div>
+              <div class="skeleton sk-line sk-med"></div>
+            </div>
+            <div class="history-list" id="historyList" style="display:none"></div>
+            <div class="history-empty" id="historyEmpty" style="display:none">
+              Zatiaľ žiadne generovanie. Vráť sa na <a href="/sk/" style="color:var(--primary)">hlavnú stránku</a> a vyskúšaj Fachbot.
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    // ── Theme ──────────────────────────────────────────────────────────────────
+    const html = document.documentElement;
+    const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    html.setAttribute('data-theme', dark ? 'dark' : 'light');
+    document.getElementById('themeToggle').addEventListener('click', () => {
+      html.setAttribute('data-theme', html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    });
+
+    // ── State ──────────────────────────────────────────────────────────────────
+    let currentEmail = localStorage.getItem('fb_email') || '';
+
+    function showNoEmail() {
+      document.getElementById('noEmailState').style.display = '';
+      document.getElementById('accountContent').style.display = 'none';
+    }
+
+    function showAccount() {
+      document.getElementById('noEmailState').style.display = 'none';
+      document.getElementById('accountContent').style.display = '';
+    }
+
+    // ── Email gate ─────────────────────────────────────────────────────────────
+    if (!currentEmail) {
+      showNoEmail();
+    } else {
+      showAccount();
+      loadAccount(currentEmail);
+    }
+
+    document.getElementById('emailSubmit').addEventListener('click', () => {
+      const val = document.getElementById('emailInput').value.trim();
+      if (!val || !val.includes('@')) {
+        document.getElementById('emailInput').classList.add('field-error');
+        return;
+      }
+      localStorage.setItem('fb_email', val);
+      currentEmail = val;
+      showAccount();
+      loadAccount(val);
+    });
+    document.getElementById('emailInput').addEventListener('keydown', e => {
+      if (e.key === 'Enter') document.getElementById('emailSubmit').click();
+    });
+
+    // ── Load account data ──────────────────────────────────────────────────────
+    async function loadAccount(email) {
+      try {
+        const res = await fetch(`/api/account?email=${encodeURIComponent(email)}`);
+        const data = await res.json();
+
+        // Greeting
+        const name = data.user?.display_name || '';
+        document.getElementById('greetingName').textContent = name ? `Ahoj, ${name.split(' ')[0]}` : 'Môj účet';
+        document.getElementById('greetingEmail').textContent = email;
+
+        // Plan status
+        const isPro = data.user?.plan === 'pro' && data.user?.subscription_status === 'active';
+        const planDot = document.getElementById('planDot');
+        const planName = document.getElementById('planName');
+        const planDetail = document.getElementById('planDetail');
+        const manageBtn = document.getElementById('manageBtn');
+        const upgradeBtn = document.getElementById('upgradeBtn');
+
+        if (isPro) {
+          planDot.classList.remove('inactive');
+          planName.textContent = 'Fachbot Pro · aktívny';
+          if (data.user?.subscription_end) {
+            const end = new Date(data.user.subscription_end);
+            planDetail.textContent = `Platí do ${end.toLocaleDateString('sk-SK')}`;
+          }
+          manageBtn.style.display = '';
+          upgradeBtn.style.display = 'none';
+        } else {
+          planDot.classList.add('inactive');
+          planName.textContent = 'Free tarif';
+          planDetail.textContent = 'Pre neobmedzené generovanie prejdi na Pro.';
+          manageBtn.style.display = 'none';
+          upgradeBtn.style.display = '';
+        }
+
+        // Profile fields
+        if (data.user) {
+          document.getElementById('profName').value = data.user.display_name || '';
+          document.getElementById('profCompany').value = data.user.company || '';
+          document.getElementById('profPhone').value = data.user.phone || '';
+          document.getElementById('profCity').value = data.user.city || '';
+          document.getElementById('profTone').value = data.user.pref_tone || 'Prirodzený';
+          document.getElementById('profAddress').value = data.user.pref_address || 'vy';
+        }
+
+        // History
+        document.getElementById('historyLoading').style.display = 'none';
+        const list = document.getElementById('historyList');
+        const empty = document.getElementById('historyEmpty');
+
+        const history = data.history || [];
+        if (history.length === 0) {
+          empty.style.display = '';
+        } else {
+          list.style.display = '';
+          list.innerHTML = history.map(item => {
+            const date = item.created_at
+              ? new Date(item.created_at).toLocaleDateString('sk-SK', { day: 'numeric', month: 'numeric', hour: '2-digit', minute: '2-digit' })
+              : '';
+            const text = item.generated_text || '';
+            const shortText = text.slice(0, 180);
+            const hasMore = text.length > 180;
+            const id = `h_${item.id || Math.random().toString(36).slice(2)}`;
+
+            return `
+              <div class="history-item">
+                <div>
+                  <div class="history-meta">
+                    <span class="history-tag">${escHtml(item.situation || '')}</span>
+                    <span class="history-tag">${escHtml(item.trade || '')}</span>
+                    <span class="history-tag">${escHtml(item.channel || '')}</span>
+                    <span class="history-date">${date}</span>
+                  </div>
+                  ${text ? `
+                    <div class="history-text" id="${id}">${escHtml(shortText)}${hasMore ? '…' : ''}</div>
+                    ${hasMore ? `<button class="expand-btn" onclick="toggleExpand('${id}', ${JSON.stringify(text)})">Zobraziť celý text</button>` : ''}
+                  ` : '<div class="history-text" style="color:var(--soft);font-style:italic">Text nie je uložený</div>'}
+                </div>
+                <div class="history-actions">
+                  ${text ? `<button class="copy-hist-btn" onclick="copyText(this, ${JSON.stringify(text)})">Kopírovat</button>` : ''}
+                </div>
+              </div>
+            `;
+          }).join('');
+        }
+
+      } catch (err) {
+        document.getElementById('historyLoading').style.display = 'none';
+        document.getElementById('historyEmpty').style.display = '';
+        document.getElementById('historyEmpty').textContent = 'Nepodarilo sa načítať dáta. Skús obnoviť stránku.';
+      }
+    }
+
+    // ── Save profile ───────────────────────────────────────────────────────────
+    document.getElementById('saveProfileBtn').addEventListener('click', async () => {
+      const btn = document.getElementById('saveProfileBtn');
+      const status = document.getElementById('saveStatus');
+      btn.disabled = true;
+      btn.textContent = 'Ukladám…';
+
+      // Uložiť do localStorage pro předvyplnění builderu
+      const name = document.getElementById('profName').value.trim();
+      const company = document.getElementById('profCompany').value.trim();
+      const phone = document.getElementById('profPhone').value.trim();
+      const city = document.getElementById('profCity').value.trim();
+
+      if (name) localStorage.setItem('fb_myName', name);
+      if (company) localStorage.setItem('fb_myCompany', company);
+      if (phone) localStorage.setItem('fb_myPhone', phone);
+      if (city) localStorage.setItem('fb_myCity', city);
+
+      try {
+        await fetch(`/api/account?email=${encodeURIComponent(currentEmail)}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            display_name: name,
+            company,
+            phone,
+            city,
+            pref_tone: document.getElementById('profTone').value,
+            pref_address: document.getElementById('profAddress').value,
+          }),
+        });
+        status.style.display = '';
+        setTimeout(() => { status.style.display = 'none'; }, 2500);
+      } catch {}
+
+      btn.disabled = false;
+      btn.textContent = 'Uložiť';
+
+      // Update greeting
+      if (name) document.getElementById('greetingName').textContent = `Ahoj, ${name.split(' ')[0]}`;
+    });
+
+    // ── Stripe portal ──────────────────────────────────────────────────────────
+    document.getElementById('manageBtn').addEventListener('click', async () => {
+      const btn = document.getElementById('manageBtn');
+      btn.disabled = true;
+      btn.textContent = 'Presmerovávam…';
+      try {
+        const res = await fetch('/api/portal', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: currentEmail, lang: 'sk' }),
+        });
+        const data = await res.json();
+        if (data.url) {
+          window.location.href = data.url;
+        } else {
+          alert(data.error || 'Nepodarilo sa otvoriť správu predplatného.');
+          btn.disabled = false;
+          btn.textContent = 'Spravovať predplatné';
+        }
+      } catch {
+        alert('Chyba pripojenia. Skús znovu.');
+        btn.disabled = false;
+        btn.textContent = 'Spravovať predplatné';
+      }
+    });
+
+    // ── Utils ──────────────────────────────────────────────────────────────────
+    function escHtml(str) {
+      return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    function copyText(btn, text) {
+      navigator.clipboard.writeText(text).then(() => {
+        const orig = btn.textContent;
+        btn.textContent = 'Skopírované';
+        setTimeout(() => { btn.textContent = orig; }, 1400);
+      });
+    }
+
+    function toggleExpand(id, fullText) {
+      const el = document.getElementById(id);
+      const btn = el.nextElementSibling;
+      if (el.classList.contains('expanded')) {
+        el.textContent = fullText.slice(0, 180) + '…';
+        el.classList.remove('expanded');
+        btn.textContent = 'Zobraziť celý text';
+      } else {
+        el.textContent = fullText;
+        el.classList.add('expanded');
+        btn.textContent = 'Skryť';
+      }
+    }
+  </script>
+</body>
+</html>

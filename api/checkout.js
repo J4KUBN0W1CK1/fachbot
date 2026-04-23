@@ -33,7 +33,7 @@ export default async function handler(req) {
 
   const origin = req.headers.get('origin')
     || req.headers.get('referer')?.replace(/\/$/, '')
-    || 'https://fachbot.vercel.app';
+    || 'https://fachbot.com';
   const langPrefix = lang === 'cs' ? '' : `/${lang}`;
 
   const successUrl = `${origin}${langPrefix}/success.html?session_id={CHECKOUT_SESSION_ID}`;
@@ -48,7 +48,15 @@ export default async function handler(req) {
   params.append('cancel_url', cancelUrl);
   params.append('payment_method_types[0]', 'card');
   params.append('allow_promotion_codes', 'true');
-  params.append('billing_address_collection', 'auto');
+
+  // ── VAT / tax ──────────────────────────────────────────────────────────────
+  // Stripe automaticky přidá DPH podle lokace zákazníka
+  // tax_id_collection umožní firmám zadat IČ/DIČ a uplatnit reverse charge (B2B)
+  params.append('automatic_tax[enabled]', 'true');
+  params.append('tax_id_collection[enabled]', 'true');
+  // billing_address_collection=required je nutné pro automatic_tax
+  params.append('billing_address_collection', 'required');
+
   if (email && email.includes('@')) {
     params.append('customer_email', email);
   }
@@ -67,12 +75,16 @@ export default async function handler(req) {
 
     if (!stripeRes.ok) {
       console.error('Stripe error:', data.error?.message);
-      return new Response(JSON.stringify({ error: data.error?.message || 'Stripe error' }), { status: 500 });
+      // User-friendly chybová zpráva
+      const msg = data.error?.code === 'resource_missing'
+        ? 'Platební metoda není dostupná. Zkus to prosím znovu.'
+        : 'Nepodařilo se otevřít platební stránku. Zkus to znovu.';
+      return new Response(JSON.stringify({ error: msg }), { status: 500 });
     }
 
     return new Response(JSON.stringify({ url: data.url }), { status: 200 });
   } catch (err) {
     console.error('Fetch error:', err.message);
-    return new Response(JSON.stringify({ error: err.message }), { status: 500 });
+    return new Response(JSON.stringify({ error: 'Nepodařilo se připojit k platební bráně.' }), { status: 500 });
   }
 }

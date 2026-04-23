@@ -3,8 +3,11 @@ export const config = { runtime: 'edge' };
 const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_SECRET_KEY = process.env.SUPABASE_SECRET_KEY;
 
-async function isProUser(email) {
-  if (!email || !SUPABASE_URL || !SUPABASE_SECRET_KEY) return false;
+// Limity: free uživatel (bez emailu) = 5, free s emailem = 5, pro = neomezeno
+const FREE_LIMIT = 5;
+
+async function getUserStatus(email) {
+  if (!email || !SUPABASE_URL || !SUPABASE_SECRET_KEY) return { isPro: false, count: 0 };
   try {
     const res = await fetch(
       `${SUPABASE_URL}/rest/v1/users?email=eq.${encodeURIComponent(email)}&select=plan,subscription_status`,
@@ -16,9 +19,39 @@ async function isProUser(email) {
       }
     );
     const data = await res.json();
-    return data?.[0]?.plan === 'pro' && data?.[0]?.subscription_status === 'active';
+    const user = data?.[0];
+    const isPro = user?.plan === 'pro' && user?.subscription_status === 'active';
+    return { isPro, exists: !!user };
   } catch {
-    return false;
+    return { isPro: false, exists: false };
+  }
+}
+
+async function getGenerationCount(email) {
+  if (!email || !SUPABASE_URL || !SUPABASE_SECRET_KEY) return 0;
+  try {
+    // Počet generování za posledních 30 dní
+    const since = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/generations?email=eq.${encodeURIComponent(email)}&created_at=gte.${since}&select=id`,
+      {
+        headers: {
+          'apikey': SUPABASE_SECRET_KEY,
+          'Authorization': `Bearer ${SUPABASE_SECRET_KEY}`,
+          'Prefer': 'count=exact',
+        },
+      }
+    );
+    const countHeader = res.headers.get('content-range');
+    // content-range: 0-4/5  → bereme číslo za lomítkem
+    if (countHeader) {
+      const total = parseInt(countHeader.split('/')[1], 10);
+      return isNaN(total) ? 0 : total;
+    }
+    const data = await res.json();
+    return Array.isArray(data) ? data.length : 0;
+  } catch {
+    return 0;
   }
 }
 
@@ -32,7 +65,7 @@ async function logGeneration(email, lang, situation, trade, channel, tone) {
         'Authorization': `Bearer ${SUPABASE_SECRET_KEY}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email: email || null, lang, situation, trade, channel, tone }),
+      body: JSON.stringify({ email: email || null, lang, situation, trade, channel, tone, generated_text: text || null }),
     });
   } catch {}
 }
@@ -58,6 +91,22 @@ export default async function handler(req) {
 
   if (!situation || !trade) {
     return new Response(JSON.stringify({ error: 'Missing required fields' }), { status: 400 });
+  }
+
+  // ── Server-side freemium gate ──────────────────────────────────────────────
+  // Pouze pokud máme email — bez emailu nelze ověřit, client-side limit platí
+  if (email && email.includes('@')) {
+    const [{ isPro }, serverCount] = await Promise.all([
+      getUserStatus(email),
+      getGenerationCount(email),
+    ]);
+
+    if (!isPro && serverCount >= FREE_LIMIT) {
+      return new Response(
+        JSON.stringify({ error: 'limit_reached', message: 'Vyčerpal jsi volná generování.' }),
+        { status: 429 }
+      );
+    }
   }
 
   const langMap = { cs: 'česky', sk: 'slovensky', pl: 'po polsku' };
