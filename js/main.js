@@ -224,3 +224,16 @@ if (showMoreBtn && tradeGridExtra) {
     );
   });
 }
+
+// Cookie bar
+const cookieBar = document.getElementById('cookieBar');
+const cookieAccept = document.getElementById('cookieAccept');
+if (cookieBar && !localStorage.getItem('cookie_ok')) {
+  cookieBar.classList.add('visible');
+}
+if (cookieAccept) {
+  cookieAccept.addEventListener('click', () => {
+    localStorage.setItem('cookie_ok', '1');
+    cookieBar.classList.remove('visible');
+  });
+}

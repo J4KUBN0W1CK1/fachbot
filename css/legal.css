@@ -1,0 +1,12 @@
+.legal-main{padding:48px 0 72px}
+.legal-wrap{max-width:720px}
+.legal-wrap h1{font-size:clamp(28px,4vw,42px);letter-spacing:-.04em;margin:0 0 6px}
+.legal-date{font-size:14px;color:var(--soft);margin:0 0 40px}
+.legal-wrap h2{font-size:18px;margin:36px 0 10px;color:var(--text)}
+.legal-wrap p{font-size:15px;color:var(--muted);line-height:1.7;margin:0 0 12px}
+.legal-wrap ul{padding-left:20px;margin:0 0 14px}
+.legal-wrap li{font-size:15px;color:var(--muted);line-height:1.7;margin:4px 0}
+.legal-wrap a{color:var(--primary);text-decoration:underline;text-underline-offset:2px}
+.legal-footer{border-top:1px solid var(--line);padding:20px 0}
+.legal-footer .wrap{display:flex;gap:12px;align-items:center;font-size:14px;color:var(--muted)}
+.legal-footer a{color:var(--primary)}

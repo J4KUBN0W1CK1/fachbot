@@ -63,9 +63,15 @@
       </nav>
       <div class="top-actions">
         <div class="lang-switch" aria-label="Přepnutí jazyka">
-          <button class="active" type="button">CZ</button>
-          <button type="button">SK</button>
-          <button type="button">PL</button>
+          <button class="active" type="button" aria-label="Čeština">
+            <span class="flag" aria-hidden="true">🇨🇿</span><span class="lang-code">CZ</span>
+          </button>
+          <button type="button" aria-label="Slovenčina">
+            <span class="flag" aria-hidden="true">🇸🇰</span><span class="lang-code">SK</span>
+          </button>
+          <button type="button" aria-label="Polski">
+            <span class="flag" aria-hidden="true">🇵🇱</span><span class="lang-code">PL</span>
+          </button>
         </div>
         <button class="theme-btn" id="themeToggle" type="button" aria-label="Přepnout režim">◐</button>
       </div>
@@ -422,6 +428,40 @@ Děkuji,</div>
 
   <div class="mobile-sticky" aria-hidden="false">
     <button class="primary-btn" id="mobileGenerateBtn" type="button">Připravit text</button>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div class="footer-brand">
+        <div class="logo" style="width:32px;height:32px;border-radius:9px">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:20px;height:20px">
+            <path d="M8 25V7"/><path d="M8 7h15"/><path d="M8 16h10"/>
+            <path d="M17 7h3.3c2.95 0 5.2 2 5.2 4.6 0 2.07-1.42 3.81-3.5 4.48"/>
+            <path d="M17 16h4.1c2.9 0 5.2 1.96 5.2 4.5S24 25 21.1 25H17"/>
+          </svg>
+        </div>
+        <span>Fachbot</span>
+      </div>
+      <div class="footer-meta">
+        <span>Provozovatel: Jakub Nowicki · IČO: 09089977 · Návsí 447, 739 92 Návsí</span>
+        <span class="footer-sep">·</span>
+        <a href="mailto:info@fachbot.com">info@fachbot.com</a>
+      </div>
+      <div class="footer-links">
+        <a href="/podminky.html">Obchodní podmínky</a>
+        <span>·</span>
+        <a href="/gdpr.html">Ochrana osobních údajů</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- COOKIE LIŠTA -->
+  <div class="cookie-bar" id="cookieBar" role="alertdialog" aria-label="Informace o cookies">
+    <div class="cookie-inner">
+      <p>Web používá pouze nezbytné technické cookies a Google Fonts (přenos IP do USA). Analytické ani reklamní cookies nepoužíváme. <a href="/gdpr.html">Více informací</a></p>
+      <button class="primary-btn cookie-ok" id="cookieAccept" type="button">Rozumím</button>
+    </div>
   </div>
 </body>
 </html>
