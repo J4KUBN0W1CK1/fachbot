@@ -82,13 +82,27 @@ if (showMoreBtn && tradeGridExtra) {
 // ─── Cookie bar ───────────────────────────────────────────────────────────────
 const cookieBar    = document.getElementById('cookieBar');
 const cookieAccept = document.getElementById('cookieAccept');
+const mobileSticky = document.querySelector('.mobile-sticky');
+
+function updateStickyVisibility() {
+  if (!mobileSticky) return;
+  const cookieVisible = cookieBar && cookieBar.classList.contains('visible');
+  if (cookieVisible) {
+    mobileSticky.style.display = 'none';
+  } else {
+    mobileSticky.style.display = '';
+  }
+}
+
 if (cookieBar && !localStorage.getItem('cookie_ok')) {
   cookieBar.classList.add('visible');
+  updateStickyVisibility();
 }
 if (cookieAccept) {
   cookieAccept.addEventListener('click', () => {
     localStorage.setItem('cookie_ok', '1');
     cookieBar.classList.remove('visible');
+    updateStickyVisibility();
   });
 }
 
@@ -455,6 +469,19 @@ const feedbackComment = document.getElementById('feedbackComment');
 const feedbackSend    = document.getElementById('feedbackSend');
 const feedbackThanks  = document.getElementById('feedbackThanks');
 
+async function sendFeedback(vote, comment = '') {
+  const situation = document.querySelector('.situation.active')?.dataset.type || '';
+  const trade = document.querySelector('.trade-pill.active')?.textContent.trim() || '';
+  const lang = window.FACHBOT_LANG || 'cs';
+  try {
+    await fetch('/api/feedback', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ vote, comment, lang, situation, trade }),
+    });
+  } catch {}
+}
+
 if (voteUp && voteDown) {
   voteUp.addEventListener('click', () => {
     voteUp.classList.add('selected');
@@ -464,6 +491,7 @@ if (voteUp && voteDown) {
       feedbackThanks.style.display = 'block';
       feedbackThanks.textContent = 'Super, díky! 🙌';
     }
+    sendFeedback('up');
   });
 
   voteDown.addEventListener('click', () => {
@@ -475,13 +503,11 @@ if (voteUp && voteDown) {
 
   feedbackSend?.addEventListener('click', () => {
     const text = document.getElementById('feedbackText')?.value.trim() || '';
-    const subject = encodeURIComponent('Zpětná vazba – Fachbot');
-    const body = encodeURIComponent(text || 'Zpětná vazba bez komentáře.');
-    window.location.href = `mailto:info@fachbot.com?subject=${subject}&body=${body}`;
+    sendFeedback('down', text);
     if (feedbackComment) feedbackComment.style.display = 'none';
     if (feedbackThanks) {
       feedbackThanks.style.display = 'block';
-      feedbackThanks.textContent = 'Díky! Otevírám tvůj email…';
+      feedbackThanks.textContent = 'Díky! Zaznamenáno.';
     }
   });
 }

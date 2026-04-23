@@ -246,6 +246,7 @@ textarea{min-height:96px;resize:vertical}
 
 /* Mobile sticky */
 .mobile-sticky{display:none}
+.mobile-sticky.hidden-by-cookie{display:none!important}
 
 /* ── RESPONSIVE ── */
 @media(max-width:1080px){
@@ -324,8 +325,8 @@ textarea{min-height:96px;resize:vertical}
   /* Buttons */
   .cta-row{flex-direction:column;gap:8px}
   .cta-row .primary-btn,.cta-row .ghost-btn{width:100%;justify-content:center}
-  .actions{flex-wrap:wrap;gap:6px}
-  .small-btn{flex:1;min-width:0;font-size:12px;padding:10px 8px}
+  .actions{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+  .small-btn{width:100%;font-size:13px;padding:11px 10px;min-height:44px}
 
   /* Sidebar / výsledek */
   .card{padding:18px;border-radius:16px}
@@ -339,6 +340,7 @@ textarea{min-height:96px;resize:vertical}
   .pdf-card{padding:20px}
   .pdf-card h3{font-size:18px}
   .pdf-muted{font-size:14px}
+  .pdf-card .primary-btn{width:100%;justify-content:center}
 
   /* Pricing */
   .pricing-section{padding-bottom:60px}
@@ -744,7 +746,7 @@ button.loading{
 
 .mobile-nav{
   display:none;
-  position:fixed;top:56px;left:0;right:0;z-index:59;
+  position:fixed;top:56px;left:0;right:0;bottom:0;z-index:59;
   background:var(--surface);
   border-bottom:1px solid var(--line);
   box-shadow:var(--shadow-md);
