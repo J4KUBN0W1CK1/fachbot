@@ -244,27 +244,115 @@ textarea{min-height:96px;resize:vertical}
   .trade-grid{grid-template-columns:repeat(3,1fr)}
 }
 
+/* ── TABLET ── */
+@media(max-width:780px){
+  .pricing-grid{grid-template-columns:1fr}
+  .pdf-grid{grid-template-columns:1fr}
+  .pdf-preview{display:none} /* schovat PDF mock na tabletu/mobilu - zbytečně zabírá místo */
+  .pdf-card{padding:32px}
+}
+
+/* ── MOBIL ── */
 @media(max-width:680px){
-  .wrap{padding:0 16px}
-  .hero{padding:32px 0 28px}
-  .hero-copy,.hero-side{padding:24px}
-  .builder{padding:24px}
-  .pdf-card{padding:28px}
-  .card{padding:22px}
-  .section{padding:40px 0}
-  .situation-grid,.field-grid{grid-template-columns:1fr}
-  .trade-grid{grid-template-columns:repeat(2,1fr)}
-  .section-head{flex-direction:column;align-items:flex-start}
-  h1{font-size:32px}
-  h2{font-size:24px}
-  .pdf-cols{grid-template-columns:1fr}
-  .mobile-sticky{display:block;position:sticky;bottom:12px;z-index:55;padding:0 16px 16px}
-  .mobile-sticky .primary-btn{width:100%}
+
+  /* Topbar */
+  .topbar-inner{min-height:56px;gap:8px}
   .top-nav{display:none}
   .lang-code{display:none}
-  .lang-switch button,.lang-btn{padding:5px 7px}
-  .flag{font-size:18px}
-  .topbar-inner{min-height:56px}
+  .lang-switch button,.lang-btn{padding:5px 8px}
+  .flag{font-size:16px}
+  .theme-btn{width:32px;height:32px;font-size:14px}
+  .brand span{font-size:17px}
+  .logo{width:34px;height:34px;border-radius:10px}
+  .logo svg{width:20px;height:20px}
+
+  /* Layout */
+  .wrap{padding:0 14px}
+  .section{padding:36px 0}
+  .section-head{flex-direction:column;align-items:flex-start;gap:10px}
+  .section-head p{font-size:14px}
+
+  /* Hero */
+  .hero{padding:28px 0 20px}
+  .hero-grid{gap:12px}
+  .hero-copy{padding:20px}
+  .hero-side{padding:20px;display:none} /* schovat hero side na mobilu - přebytečné */
+  h1{font-size:30px;letter-spacing:-.035em}
+  .lead{font-size:15px;margin-bottom:20px}
+  .hero-cta{gap:8px}
+  .hero-cta .primary-btn,.hero-cta .ghost-btn{flex:1;text-align:center;font-size:13px;padding:11px 14px}
+  .hero-tags{gap:6px;margin-top:16px}
+  .tag{font-size:11px;padding:4px 10px}
+
+  /* Builder */
+  .builder{padding:20px;border-radius:16px}
+  .builder-head{margin-bottom:20px}
+  .builder-head h2{font-size:20px}
+  .step{padding:20px 0}
+
+  /* Situace - 1 sloupec na úzkém mobilu, 2 na širším */
+  .situation-grid{grid-template-columns:repeat(2,1fr);gap:8px}
+  .situation{padding:12px;border-radius:12px}
+  .situation strong{font-size:13px}
+  .situation span{font-size:12px}
+
+  /* Trade pills */
+  .trade-grid{grid-template-columns:repeat(2,1fr);gap:6px}
+  .trade-pill{padding:8px 6px;font-size:12px}
+
+  /* Fields */
+  .field-grid{grid-template-columns:1fr;gap:10px}
+  .field-grid .field{grid-column:auto}
+  .field.full{grid-column:auto}
+  input,textarea,select{padding:10px 12px;font-size:14px}
+  textarea{min-height:80px}
+
+  /* Accordion */
+  .accordion-summary{padding:12px 14px}
+  .accordion-body{padding:4px 14px 14px}
+
+  /* Buttons */
+  .cta-row{flex-direction:column;gap:8px}
+  .cta-row .primary-btn,.cta-row .ghost-btn{width:100%;justify-content:center}
+  .actions{flex-wrap:wrap;gap:6px}
+  .small-btn{flex:1;min-width:0;font-size:12px;padding:10px 8px}
+
+  /* Sidebar / výsledek */
+  .card{padding:18px;border-radius:16px}
+  .card h3{font-size:15px;margin-bottom:12px}
+  .result-meta div{font-size:12px;padding:7px 10px}
+  .result-box{padding:14px;min-height:140px;font-size:13px}
+  .upgrade-hint{padding:12px 14px}
+
+  /* PDF sekce */
+  .pdf-section{padding:8px 0 48px}
+  .pdf-card{padding:20px}
+  .pdf-card h3{font-size:18px}
+  .pdf-muted{font-size:14px}
+
+  /* Pricing */
+  .pricing-section{padding-bottom:60px}
+  .pricing-card{padding:22px}
+  .pricing-price{font-size:26px}
+  .billing-toggle{width:100%}
+  .billing-btn{flex:1;justify-content:center}
+
+  /* Recenze */
+  .reviews-grid{grid-template-columns:1fr;gap:12px}
+  .review-card{padding:18px}
+
+  /* Mobile sticky CTA */
+  .mobile-sticky{display:block;position:fixed;bottom:0;left:0;right:0;z-index:55;padding:12px 14px;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(12px);border-top:1px solid var(--line)}
+  .mobile-sticky .primary-btn{width:100%;font-size:15px;padding:14px}
+}
+
+/* ── VELMI MALÝ MOBIL (< 380px) ── */
+@media(max-width:380px){
+  .situation-grid{grid-template-columns:1fr}
+  .trade-grid{grid-template-columns:repeat(2,1fr)}
+  h1{font-size:26px}
+  .hero-cta{flex-direction:column}
+  .hero-cta .primary-btn,.hero-cta .ghost-btn{width:100%}
 }
 
 /* ── LANG SWITCH S VLAJKAMI ── */
@@ -597,4 +685,57 @@ button.loading{
   color:var(--primary);
   text-decoration:underline;
   text-underline-offset:3px;
+}
+
+/* ── HAMBURGER + MOBILE NAV ── */
+.hamburger{
+  display:none;
+  flex-direction:column;justify-content:center;gap:5px;
+  width:36px;height:36px;padding:6px;
+  border:1px solid var(--line);border-radius:10px;
+  background:var(--surface);cursor:pointer;
+  order:-1; /* vlevo před logem */
+}
+.hamburger span{
+  display:block;height:2px;border-radius:2px;
+  background:var(--text);
+  transition:transform .2s,opacity .2s;
+}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+.mobile-nav{
+  display:none;
+  position:fixed;top:56px;left:0;right:0;z-index:59;
+  background:var(--surface);
+  border-bottom:1px solid var(--line);
+  box-shadow:var(--shadow-md);
+  flex-direction:column;
+  transform:translateY(-8px);
+  opacity:0;
+  transition:transform .2s ease,opacity .2s ease;
+  pointer-events:none;
+}
+.mobile-nav.open{
+  transform:translateY(0);
+  opacity:1;
+  pointer-events:all;
+}
+.mobile-nav-link{
+  display:block;
+  padding:16px 20px;
+  font-size:16px;font-weight:600;
+  color:var(--text);
+  border-bottom:1px solid var(--line);
+  text-decoration:none;
+  transition:background .15s;
+}
+.mobile-nav-link:last-child{border-bottom:0}
+.mobile-nav-link:active{background:var(--surface-2)}
+
+@media(max-width:680px){
+  .hamburger{display:flex}
+  .mobile-nav{display:flex}
+  .topbar-inner{flex-wrap:nowrap}
 }
