@@ -43,7 +43,7 @@
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 /* ── SCROLL OFFSET (topbar výška ~64px) ── */
-#app, #pdf, #pricing, #recenze {
+#app, #pdf, #pricing, #recenze, #recenzie, #opinie {
   scroll-margin-top: 72px;
 }
 
