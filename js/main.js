@@ -204,3 +204,23 @@ mailBtn.addEventListener('click', () => {
   const body = encodeURIComponent(resultBox.textContent);
   window.location.href = `mailto:${mail}?subject=${subject}&body=${body}`;
 });
+
+// Show more trades
+const showMoreBtn = document.getElementById('showMoreTrades');
+const tradeGridExtra = document.getElementById('tradeGridExtra');
+if (showMoreBtn && tradeGridExtra) {
+  showMoreBtn.addEventListener('click', () => {
+    tradeGridExtra.classList.toggle('hidden');
+    showMoreBtn.textContent = tradeGridExtra.classList.contains('hidden')
+      ? '+ Zobrazit více profesí'
+      : '− Skrýt';
+    // Make extra pills selectable
+    tradeGridExtra.querySelectorAll('.trade-pill').forEach(btn =>
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.trade-pill').forEach(x => x.classList.remove('active'));
+        btn.classList.add('active');
+        if (metaTrade) metaTrade.textContent = btn.textContent.trim();
+      })
+    );
+  });
+}
