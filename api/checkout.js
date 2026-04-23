@@ -46,6 +46,7 @@ export default async function handler(req) {
   params.append('line_items[0][quantity]', '1');
   params.append('success_url', successUrl);
   params.append('cancel_url', cancelUrl);
+  params.append('payment_method_types[0]', 'card');
   params.append('allow_promotion_codes', 'true');
   params.append('billing_address_collection', 'auto');
   if (email && email.includes('@')) {
