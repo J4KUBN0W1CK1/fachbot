@@ -17,7 +17,7 @@ export default async function handler(req) {
     return new Response(JSON.stringify({ error: 'Invalid JSON' }), { status: 400 });
   }
 
-  const { situation, trade, description, tone, channel, clientName, clientThing, myName, myCompany, myPhone, myCity, lang = 'cs' } = body;
+  const { situation, trade, description, tone, channel, addressMode = 'vy', clientName, clientThing, myName, myCompany, myPhone, myCity, lang = 'cs' } = body;
 
   if (!situation || !trade) {
     return new Response(JSON.stringify({ error: 'Missing required fields' }), { status: 400 });
@@ -35,10 +35,13 @@ export default async function handler(req) {
   };
 
   const toneInstructions = {
-    'Přirozený a stručný': 'Tón: přirozený, stručný, bez formálností.',
-    'Více profesionální': 'Tón: profesionální, věcný, formálnější.',
-    'Více přátelský': 'Tón: přátelský, uvolněný, osobní.',
+    'Přirozený': 'Tón: přirozený, stručný, lidský. Žádné korporátní fráze.',
+    'Formální': 'Tón: formální, věcný, profesionální. Správná čeština, zdvořilé formulace.',
   };
+
+  const addressInstructions = addressMode === 'ty'
+    ? 'Zákazníka tykej — používej 2. osobu jednotného čísla (ty, tvůj, zavolej...).'
+    : 'Zákazníkovi vykej — používej 2. osobu množného čísla (Vy, Váš, zavolejte...). Vy/Váš piš s velkým V.';
 
   const situationInstructions = {
     'Požádat o recenzi': 'Napiš přátelskou žádost o Google recenzi. Zákazník je spokojený, požádej ho přirozeně — bez nátlaku, bez hvězdiček v textu. Přidej odkaz na Google recenze jako placeholder: [odkaz na Google recenze].',
@@ -51,7 +54,8 @@ export default async function handler(req) {
   const systemPrompt = `Jsi asistent pro ${trade}. Pomáháš psát zprávy zákazníkům ${langText}. 
 Piš vždy ${langText}. Nikdy nepřidávej vysvětlení, jen samotný text zprávy.
 ${channelInstructions[channel] || channelInstructions['WhatsApp zpráva']}
-${toneInstructions[tone] || toneInstructions['Přirozený a stručný']}${situationExtra}
+${toneInstructions[tone] || toneInstructions['Přirozený']}
+${addressInstructions}${situationExtra}
 ${myName ? `Odesílatel: ${myName}${myCompany ? ', ' + myCompany : ''}${myCity ? ', ' + myCity : ''}${myPhone ? ', ' + myPhone : ''}.` : ''}
 Vždy přidej podpis odesílatele pokud jsou jeho údaje k dispozici.`;
 

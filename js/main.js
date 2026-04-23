@@ -8,6 +8,7 @@ const metaSituation    = document.getElementById('metaSituation');
 const metaChannel      = document.getElementById('metaChannel');
 const metaTrade        = document.getElementById('metaTrade');
 const tone             = document.getElementById('tone');
+const addressMode      = document.getElementById('addressMode');
 const jobDesc          = document.getElementById('jobDesc');
 const clientName       = document.getElementById('clientName');
 const clientThing      = document.getElementById('clientThing');
@@ -212,8 +213,9 @@ async function runGeneration() {
   const situation  = document.querySelector('.situation.active')?.dataset.type || 'Domluvit termín';
   const trade      = document.querySelector('.trade-pill.active')?.textContent.trim() || 'Instalatér';
   const desc       = jobDesc.value.trim();
-  const toneValue  = tone.value;
-  const output     = channel.value;
+  const toneValue      = tone.value;
+  const addressModeValue = addressMode?.value || 'vy';
+  const output         = channel.value;
   const cName      = clientName.value.trim();
   const cThing     = clientThing.value.trim();
   const signer     = myName.value.trim();
@@ -233,6 +235,7 @@ async function runGeneration() {
         trade,
         description: desc,
         tone: toneValue,
+        addressMode: addressModeValue,
         channel: output,
         clientName: cName,
         clientThing: cThing,
