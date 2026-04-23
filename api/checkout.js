@@ -1,5 +1,5 @@
-// api/checkout.js — Stripe Checkout session (Node.js runtime)
-const Stripe = require('stripe');
+// api/checkout.js — Stripe Checkout session přes REST API (bez npm balíčku)
+export const config = { runtime: 'edge' };
 
 const PRICES = {
   cs: {
@@ -16,43 +16,62 @@ const PRICES = {
   },
 };
 
-module.exports = async function handler(req, res) {
+export default async function handler(req) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+    return new Response(JSON.stringify({ error: 'Method not allowed' }), { status: 405 });
   }
 
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+  let body = {};
+  try { body = await req.json(); } catch {}
 
-  const { lang = 'cs', billing = 'monthly', email = '' } = req.body || {};
+  const { lang = 'cs', billing = 'monthly', email = '' } = body;
 
   const priceId = PRICES[lang]?.[billing];
   if (!priceId) {
-    return res.status(400).json({ error: 'Neplatna kombinace' });
+    return new Response(JSON.stringify({ error: 'Neplatna kombinace' }), { status: 400 });
   }
 
-  const origin = req.headers.origin
-    || (req.headers.referer ? req.headers.referer.replace(/\/[^/]*$/, '') : null)
+  const origin = req.headers.get('origin')
+    || req.headers.get('referer')?.replace(/\/$/, '')
     || 'https://fachbot.vercel.app';
   const langPrefix = lang === 'cs' ? '' : `/${lang}`;
 
-  try {
-    const sessionParams = {
-      mode: 'subscription',
-      line_items: [{ price: priceId, quantity: 1 }],
-      success_url: `${origin}${langPrefix}/success.html?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url:  `${origin}${langPrefix}/#pricing`,
-      allow_promotion_codes: true,
-      billing_address_collection: 'auto',
-    };
+  const successUrl = `${origin}${langPrefix}/success.html?session_id={CHECKOUT_SESSION_ID}`;
+  const cancelUrl  = `${origin}${langPrefix}/#pricing`;
 
-    if (email && email.includes('@')) {
-      sessionParams.customer_email = email;
+  // Sestavíme form-encoded body pro Stripe API
+  const params = new URLSearchParams();
+  params.append('mode', 'subscription');
+  params.append('line_items[0][price]', priceId);
+  params.append('line_items[0][quantity]', '1');
+  params.append('success_url', successUrl);
+  params.append('cancel_url', cancelUrl);
+  params.append('allow_promotion_codes', 'true');
+  params.append('billing_address_collection', 'auto');
+  if (email && email.includes('@')) {
+    params.append('customer_email', email);
+  }
+
+  try {
+    const stripeRes = await fetch('https://api.stripe.com/v1/checkout/sessions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.STRIPE_SECRET_KEY}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: params.toString(),
+    });
+
+    const data = await stripeRes.json();
+
+    if (!stripeRes.ok) {
+      console.error('Stripe error:', data.error?.message);
+      return new Response(JSON.stringify({ error: data.error?.message || 'Stripe error' }), { status: 500 });
     }
 
-    const session = await stripe.checkout.sessions.create(sessionParams);
-    return res.status(200).json({ url: session.url });
+    return new Response(JSON.stringify({ url: data.url }), { status: 200 });
   } catch (err) {
-    console.error('Stripe error:', err.message);
-    return res.status(500).json({ error: err.message });
+    console.error('Fetch error:', err.message);
+    return new Response(JSON.stringify({ error: err.message }), { status: 500 });
   }
-};
+}
