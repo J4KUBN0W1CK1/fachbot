@@ -280,3 +280,131 @@ textarea{min-height:96px;resize:vertical}
   .cookie-inner{flex-direction:column;align-items:flex-start}
   .cookie-ok{width:100%}
 }
+
+/* ── FREEMIUM MODALS ── */
+.fb-modal-overlay{
+  position:fixed;inset:0;z-index:1000;
+  background:rgba(6,9,9,.72);
+  backdrop-filter:blur(6px);
+  display:flex;align-items:center;justify-content:center;
+  padding:20px;
+  opacity:0;transition:opacity .25s ease;
+}
+.fb-modal-overlay.visible{opacity:1}
+
+.fb-modal{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-lg);
+  padding:40px 36px;
+  max-width:420px;width:100%;
+  text-align:center;
+  transform:translateY(16px);transition:transform .25s ease;
+}
+.fb-modal-overlay.visible .fb-modal{transform:translateY(0)}
+
+.fb-modal-icon{
+  font-size:36px;margin-bottom:16px;
+  line-height:1;
+}
+
+.fb-modal h2{
+  margin:0 0 10px;
+  font-size:20px;font-weight:800;
+  color:var(--text);
+  line-height:1.25;
+}
+
+.fb-modal p{
+  margin:0 0 20px;
+  font-size:15px;color:var(--muted);
+  line-height:1.55;
+}
+
+.fb-modal input[type="email"]{
+  width:100%;padding:12px 16px;
+  border:1.5px solid var(--line);
+  border-radius:var(--radius-sm);
+  background:var(--surface-2);
+  color:var(--text);
+  font-size:15px;
+  margin-bottom:8px;
+  transition:border-color .15s;
+}
+.fb-modal input[type="email"]:focus{
+  outline:none;border-color:var(--primary);
+}
+.fb-modal input[type="email"].field-error{
+  border-color:#e53e3e;
+  animation:shake .25s ease;
+}
+
+.fb-modal-hint{
+  font-size:12px !important;
+  color:var(--soft) !important;
+  margin-bottom:20px !important;
+}
+
+.fb-modal-btn{
+  display:block;width:100%;
+  padding:14px 20px;
+  background:var(--primary);color:var(--primary-ink);
+  border:none;border-radius:var(--radius-sm);
+  font-size:15px;font-weight:700;
+  cursor:pointer;
+  transition:background .15s,transform .1s;
+  margin-bottom:10px;
+}
+.fb-modal-btn:hover{background:var(--primary-strong);transform:translateY(-1px)}
+.fb-modal-btn:active{transform:translateY(0)}
+
+.fb-modal-skip{
+  display:block;width:100%;
+  background:none;border:none;
+  color:var(--soft);font-size:14px;
+  cursor:pointer;padding:8px;
+  text-decoration:underline;text-underline-offset:3px;
+  transition:color .15s;
+}
+.fb-modal-skip:hover{color:var(--text)}
+
+/* Paywall extras */
+.fb-paywall-price{
+  display:flex;align-items:baseline;justify-content:center;
+  margin:8px 0 16px;
+}
+.fb-price-amount{
+  font-size:32px;font-weight:800;color:var(--primary);
+}
+.fb-price-period{
+  font-size:15px;color:var(--muted);
+}
+
+.fb-paywall-perks{
+  list-style:none;padding:0;margin:0 0 24px;
+  text-align:left;
+  display:inline-block;
+}
+.fb-paywall-perks li{
+  font-size:14px;color:var(--muted);
+  padding:3px 0;
+}
+
+/* Loading state on button */
+.btn-primary.loading,
+button.loading{
+  opacity:.7;cursor:not-allowed;
+}
+
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  25%{transform:translateX(-6px)}
+  75%{transform:translateX(6px)}
+}
+
+@media(max-width:480px){
+  .fb-modal{padding:28px 20px}
+  .fb-modal h2{font-size:18px}
+  .fb-price-amount{font-size:26px}
+}
