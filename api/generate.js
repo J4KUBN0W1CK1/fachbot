@@ -40,10 +40,18 @@ export default async function handler(req) {
     'Více přátelský': 'Tón: přátelský, uvolněný, osobní.',
   };
 
+  const situationInstructions = {
+    'Požádat o recenzi': 'Napiš přátelskou žádost o Google recenzi. Zákazník je spokojený, požádej ho přirozeně — bez nátlaku, bez hvězdiček v textu. Přidej odkaz na Google recenze jako placeholder: [odkaz na Google recenze].',
+    'Připomenout termín': 'Napiš krátkou přátelskou připomínku termínu návštěvy den předem. Uveď datum a čas pokud jsou v popisu. Max 3 věty.',
+    'Odmítnout zakázku': 'Napiš slušné odmítnutí zakázky. Nebude znít jako výmluva — jednoduše nemáš kapacitu nebo zakázka nespadá do tvého oboru. Zachovej dobrý vztah, případně navrhni alternativu.',
+  };
+
+  const situationExtra = situationInstructions[situation] ? `\nSpecifické instrukce pro tuto situaci: ${situationInstructions[situation]}` : '';
+
   const systemPrompt = `Jsi asistent pro ${trade}. Pomáháš psát zprávy zákazníkům ${langText}. 
 Piš vždy ${langText}. Nikdy nepřidávej vysvětlení, jen samotný text zprávy.
 ${channelInstructions[channel] || channelInstructions['WhatsApp zpráva']}
-${toneInstructions[tone] || toneInstructions['Přirozený a stručný']}
+${toneInstructions[tone] || toneInstructions['Přirozený a stručný']}${situationExtra}
 ${myName ? `Odesílatel: ${myName}${myCompany ? ', ' + myCompany : ''}${myCity ? ', ' + myCity : ''}${myPhone ? ', ' + myPhone : ''}.` : ''}
 Vždy přidej podpis odesílatele pokud jsou jeho údaje k dispozici.`;
 

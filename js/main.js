@@ -353,3 +353,23 @@ if (billMonthly && billYearly && pricingSection) {
     billMonthly.classList.remove('active');
   });
 }
+
+// ─── Show more situations ─────────────────────────────────────────────────────
+const showMoreSituations  = document.getElementById('showMoreSituations');
+const situationGridExtra  = document.getElementById('situationGridExtra');
+
+if (showMoreSituations && situationGridExtra) {
+  showMoreSituations.addEventListener('click', () => {
+    situationGridExtra.classList.toggle('hidden');
+    showMoreSituations.textContent = situationGridExtra.classList.contains('hidden')
+      ? '+ Zobrazit další situace'
+      : '− Skrýt';
+    situationGridExtra.querySelectorAll('.situation').forEach(btn =>
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.situation').forEach(x => x.classList.remove('active'));
+        btn.classList.add('active');
+        if (metaSituation) metaSituation.textContent = btn.dataset.type;
+      })
+    );
+  });
+}
