@@ -243,7 +243,7 @@ async function runGeneration() {
         myCompany: company,
         myPhone: phone,
         myCity: city,
-        lang: 'cs',
+        lang: window.FACHBOT_LANG || 'cs',
       }),
     });
 
@@ -374,5 +374,58 @@ if (showMoreSituations && situationGridExtra) {
         if (metaSituation) metaSituation.textContent = btn.dataset.type;
       })
     );
+  });
+}
+
+// ─── Feedback widget ──────────────────────────────────────────────────────────
+const voteUp          = document.getElementById('voteUp');
+const voteDown        = document.getElementById('voteDown');
+const feedbackComment = document.getElementById('feedbackComment');
+const feedbackText    = document.getElementById('feedbackText');
+const feedbackSend    = document.getElementById('feedbackSend');
+const feedbackThanks  = document.getElementById('feedbackThanks');
+
+let selectedVote = null;
+
+function sendFeedback(vote, comment) {
+  const situation = document.querySelector('.situation.active')?.dataset.type || '';
+  const trade     = document.querySelector('.trade-pill.active')?.textContent.trim() || '';
+  const lang      = window.FACHBOT_LANG || 'cs';
+
+  fetch('/api/feedback', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ vote, comment, lang, situation, trade }),
+  }).catch(() => {}); // silent fail — UX first
+}
+
+if (voteUp && voteDown) {
+  [voteUp, voteDown].forEach(btn => {
+    btn.addEventListener('click', () => {
+      selectedVote = btn === voteUp ? '👍' : '👎';
+      voteUp.classList.toggle('selected', btn === voteUp);
+      voteDown.classList.toggle('selected', btn === voteDown);
+
+      if (feedbackComment) feedbackComment.style.display = 'block';
+
+      // Auto-send positive votes immediately, wait for comment on negative
+      if (btn === voteUp) {
+        sendFeedback(selectedVote, '');
+        if (feedbackThanks) {
+          feedbackThanks.style.display = 'block';
+          feedbackThanks.textContent = 'Super, díky! 🙌';
+        }
+        if (feedbackComment) feedbackComment.style.display = 'none';
+      }
+    });
+  });
+
+  feedbackSend?.addEventListener('click', () => {
+    sendFeedback(selectedVote || '👎', feedbackText?.value.trim() || '');
+    if (feedbackComment) feedbackComment.style.display = 'none';
+    if (feedbackThanks) {
+      feedbackThanks.style.display = 'block';
+      feedbackThanks.textContent = 'Díky za zpětnou vazbu!';
+    }
   });
 }

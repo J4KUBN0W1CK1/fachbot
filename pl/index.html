@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="pl" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fachbot – mniej pisania, więcej gotowych zleceń</title>
+  <meta name="description" content="Fachbot pomaga rzemieślnikom i serwisom w Polsce, Czechach i Słowacji szybko tworzyć wiadomości, oferty i profesjonalne PDF bez zbędnej administracji. Działa na telefonie w ciągu dnia." />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+  <meta name="theme-color" content="#0f766e" />
+  <link rel="canonical" href="https://fachbot.pl/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Fachbot – prosta administracja i komunikacja dla rzemieślników" />
+  <meta property="og:description" content="Szybkie wiadomości, oferty, PDF i lepsza komunikacja z klientami dla rzemieślników w CZ / SK / PL." />
+  <meta property="og:locale" content="pl_PL" />
+  <meta property="og:image" content="https://fachbot.pl/img/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:image" content="https://fachbot.pl/img/og.png">
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"Fachbot",
+    "applicationCategory":"BusinessApplication",
+    "operatingSystem":"Web",
+    "inLanguage":["cs","sk","pl"],
+    "description":"Prosty narzędzie webowe dla rzemieślników i serwisów. Pomaga szybko przygotować wiadomości, oferty i profesjonalne dokumenty PDF.",
+    "offers":{
+      "@type":"Offer",
+      "name":"Fachbot Pro",
+      "price":"10",
+      "priceCurrency":"PLN",
+      "description":"Miesięczna subskrypcja dla rzemieślników i małych zespołów."
+    }
+  }
+  </script>
+
+  <script>window.FACHBOT_LANG='pl';</script>
+  <script src="../js/main.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#app">Przejdź do głównej treści</a>
+
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <div class="brand" aria-label="Fachbot">
+        <div class="logo">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M8 25V7" />
+            <path d="M8 7h15" />
+            <path d="M8 16h10" />
+            <path d="M17 7h3.3c2.95 0 5.2 2 5.2 4.6 0 2.07-1.42 3.81-3.5 4.48" />
+            <path d="M17 16h4.1c2.9 0 5.2 1.96 5.2 4.5S24 25 21.1 25H17" />
+          </svg>
+        </div>
+        <span>Fachbot</span>
+      </div>
+      <nav class="top-nav" aria-label="Główna nawigacja">
+        <a href="#app">Wypróbuj</a>
+        <a href="#pdf">Oferta PDF</a>
+        <a href="#pricing">Cennik</a>
+      </nav>
+      <div class="top-actions">
+        <div class="lang-switch" aria-label="Zmiana języka">
+          <a href="/" type="button" aria-label="Čeština">
+            <span class="flag" aria-hidden="true">🇨🇿</span><span class="lang-code">CZ</span>
+          </a>
+          <a href="/sk/" type="button" aria-label="Slovenčina">
+            <span class="flag" aria-hidden="true">🇸🇰</span><span class="lang-code">SK</span>
+          </a>
+          <button class="active" type="button" aria-label="Polski">
+            <span class="flag" aria-hidden="true">🇵🇱</span><span class="lang-code">PL</span>
+          </button>
+        </div>
+        <button class="theme-btn" id="themeToggle" type="button" aria-label="Przełącz tryb">◐</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="wrap hero-grid">
+        <section class="panel hero-copy">
+          <div class="eyebrow">Dla rzemieślników, serwisów, detailingu i wypożyczalni · CZ / SK / PL</div>
+          <h1 id="hero-heading">Mniej pisania.<br>Więcej gotowych zleceń.</h1>
+          <p class="lead">Z kilku słów przygotuje wiadomość, ofertę lub PDF — gotowe do wysłania przez WhatsApp, SMS lub e-mail.</p>
+          <div class="hero-cta">
+            <a href="#app" class="primary-btn">Wypróbuj za darmo</a>
+            <a href="#pricing" class="ghost-btn">Cennik</a>
+          </div>
+        </section>
+
+        <aside class="panel hero-side" aria-label="Co dostaniesz od razu">
+          <h3>Co dostaniesz od razu</h3>
+          <div class="proof-item"><strong>Wiadomość do klienta w 60 sekund</strong><span>Wybierasz sytuację, piszesz kilka słów — Fachbot buduje całą wiadomość.</span></div>
+          <div class="proof-item"><strong>Profesjonalne PDF bez Worda</strong><span>Oferta lub potwierdzenie, które klient potraktuje poważnie.</span></div>
+          <div class="proof-item"><strong>Prosto na WhatsApp lub email</strong><span>Jedno kliknięcie i tekst idzie do klienta. Bez kopiowania.</span></div>
+          <div class="hero-tags">
+            <span class="tag">Bez rejestracji</span>
+            <span class="tag">Mobilnie i na PC</span>
+            <span class="tag">CZ / SK / PL</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- DEMO -->
+    <section class="section" id="app" aria-labelledby="app-heading">
+      <div class="wrap app-grid">
+        <section class="panel builder">
+          <div class="builder-head">
+            <div class="section-eyebrow">Demo bez rejestracji</div>
+            <h2 id="app-heading">Wypróbuj na własnym zleceniu</h2>
+          </div>
+
+          <!-- Krok 1: Sytuacje -->
+          <div class="step">
+            <div class="step-label">
+              <div class="step-num">1</div>
+              <h3>Krok 1: Co chcesz załatwić</h3>
+            </div>
+            <div class="situation-grid" id="situations">
+              <button class="situation active" data-type="Umówić termin" type="button">
+                <strong>Umówić termin</strong>
+                <span>Propozycja czasu lub zmiana wizyty.</span>
+              </button>
+              <button class="situation" data-type="Wysłać ofertę" type="button">
+                <strong>Wysłać ofertę</strong>
+                <span>Oferta cenowa bez zbędnego gadania.</span>
+              </button>
+              <button class="situation" data-type="Doprecyzować zlecenie" type="button">
+                <strong>Doprecyzować zlecenie</strong>
+                <span>Dopytanie o szczegóły lub zakres prac.</span>
+              </button>
+              <button class="situation" data-type="Przypomnieć o płatności" type="button">
+                <strong>Przypomnieć o płatności</strong>
+                <span>Uprzejme przypomnienie bez niezręcznego tonu.</span>
+              </button>
+            </div>
+            <button class="show-more-btn" id="showMoreSituations" type="button">+ Pokaż więcej sytuacji</button>
+            <div class="situation-grid situation-grid-extra hidden" id="situationGridExtra">
+              <button class="situation" data-type="Poprosić o recenzję" type="button">
+                <strong>Poprosić o recenzję</strong>
+                <span>Uprzejma prośba o recenzję Google po zleceniu.</span>
+              </button>
+              <button class="situation" data-type="Przypomnieć o terminie" type="button">
+                <strong>Przypomnieć o terminie</strong>
+                <span>Przypomnienie dzień przed wizytą klienta.</span>
+              </button>
+              <button class="situation" data-type="Odmówić zlecenia" type="button">
+                <strong>Odmówić zlecenia</strong>
+                <span>Uprzejma odmowa bez utraty relacji.</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Krok 2: Zawód -->
+          <div class="step">
+            <div class="step-label">
+              <div class="step-num">2</div>
+              <h3>Krok 2: Twój zawód</h3>
+            </div>
+            <div class="trade-grid" id="tradeGrid">
+              <button class="trade-pill active" type="button">Hydraulik</button>
+              <button class="trade-pill" type="button">Elektryk</button>
+              <button class="trade-pill" type="button">Serwis samochodowy</button>
+              <button class="trade-pill" type="button">Detailing</button>
+              <button class="trade-pill" type="button">Pranie tapicerki</button>
+              <button class="trade-pill" type="button">Murarz</button>
+              <button class="trade-pill" type="button">Stolarz</button>
+              <button class="trade-pill" type="button">Inna usługa</button>
+            </div>
+            <button class="show-more-btn" id="showMoreTrades" type="button">+ Pokaż więcej zawodów</button>
+            <div class="trade-grid trade-grid-extra hidden" id="tradeGridExtra">
+              <button class="trade-pill" type="button">Malarz / lakiernik</button>
+              <button class="trade-pill" type="button">Instalator CO / HVAC</button>
+              <button class="trade-pill" type="button">Posadzkarz</button>
+              <button class="trade-pill" type="button">Kafelkarz</button>
+              <button class="trade-pill" type="button">Ogrodnik / konserwacja</button>
+              <button class="trade-pill" type="button">Wypożyczalnia / wynajem</button>
+              <button class="trade-pill" type="button">Mycie okien</button>
+              <button class="trade-pill" type="button">Montaż / serwis</button>
+              <button class="trade-pill" type="button">Przeprowadzki / opróżnianie</button>
+            </div>
+          </div>
+
+          <!-- Krok 3: Opis + wyjście -->
+          <div class="step">
+            <div class="step-label">
+              <div class="step-num">3</div>
+              <h3>Krok 3: Opisz zlecenie kilkoma słowami</h3>
+            </div>
+            <div class="field-grid">
+              <div class="field full">
+                <label for="jobDesc">Co chcesz załatwić z klientem</label>
+                <textarea id="jobDesc" placeholder="Np. wymiana baterii w łazience, klient chce orientacyjną cenę i zaproponować 2 możliwe terminy."></textarea>
+              </div>
+              <div class="field">
+                <label for="tone">Styl</label>
+                <select id="tone">
+                  <option>Naturalny</option>
+                  <option>Formalny</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="addressMode">Zwrot</label>
+                <select id="addressMode">
+                  <option value="vy">Pan/Pani (per Vy)</option>
+                  <option value="ty">Po imieniu (per Ty)</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="channel">Wyjście</label>
+                <select id="channel">
+                  <option>Wiadomość WhatsApp</option>
+                  <option>SMS</option>
+                  <option>E-mail</option>
+                  <option>Oferta cenowa</option>
+                  <option>Oferta PDF / faktura</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Krok 4: Szczegóły (opcjonalne) -->
+          <div class="step">
+            <div class="step-label">
+              <div class="step-num">4</div>
+              <h3>Krok 4: Szczegóły</h3>
+            </div>
+            <details class="accordion">
+              <summary class="accordion-summary">
+                <strong>Klient + Twoje dane</strong>
+                <small>Opcjonalne — do podpisu i dokładnego wyniku</small>
+              </summary>
+              <div class="accordion-body">
+                <div class="field-grid" style="margin-bottom:16px">
+                  <div class="field">
+                    <label for="clientName">Imię klienta</label>
+                    <input id="clientName" placeholder="Np. pan Nowak">
+                  </div>
+                  <div class="field">
+                    <label for="clientThing">Przedmiot zlecenia</label>
+                    <input id="clientThing" placeholder="Np. łazienka / Škoda Kodiaq">
+                  </div>
+                  <div class="field">
+                    <label for="clientPhone">Telefon klienta</label>
+                    <input id="clientPhone" placeholder="+48...">
+                  </div>
+                  <div class="field">
+                    <label for="clientEmail">E-mail klienta</label>
+                    <input id="clientEmail" placeholder="klient@email.pl">
+                  </div>
+                </div>
+                <div class="field-divider">Twoje dane</div>
+                <div class="field-grid">
+                  <div class="field">
+                    <label for="myName">Twoje imię</label>
+                    <input id="myName" placeholder="Np. Piotr Kowalski">
+                  </div>
+                  <div class="field">
+                    <label for="myCompany">Firma</label>
+                    <input id="myCompany" placeholder="Np. Kowalski Hydraulika">
+                  </div>
+                  <div class="field">
+                    <label for="myPhone">Twój telefon</label>
+                    <input id="myPhone" placeholder="+48...">
+                  </div>
+                  <div class="field">
+                    <label for="myCity">Miasto / region</label>
+                    <input id="myCity" placeholder="Np. Warszawa i okolice">
+                  </div>
+                </div>
+              </div>
+            </details>
+          </div>
+
+          <div class="cta-row">
+            <button class="primary-btn" id="generateBtn" type="button">Przygotuj tekst</button>
+            <button class="ghost-btn" id="resetBtn" type="button">Wyczyść</button>
+          </div>
+        </section>
+
+        <!-- Sidebar / podgląd -->
+        <aside class="sidebar" aria-label="Podgląd i akcje">
+          <section class="panel card">
+            <h3>Podgląd</h3>
+            <div class="result-meta">
+              <div><strong>Sytuacja:</strong> <span id="metaSituation">Umówić termin</span></div>
+              <div><strong>Wyjście:</strong> <span id="metaChannel">Wiadomość WhatsApp</span></div>
+              <div><strong>Usługa:</strong> <span id="metaTrade">Hydraulik</span></div>
+            </div>
+            <div class="result-box" id="resultBox">Dzień dobry Panie Nowak,
+
+odezwałem się w sprawie Pana zapytania. Mogę zaproponować termin we wtorek po południu lub w środę przed południem.
+
+Jeśli jeden z terminów Panu odpowiada, od razu go potwierdzimy. Jeśli Pan chce, mogę też przesłać krótką ofertę cenową.
+
+Dziękuję,</div>
+            <div class="actions" aria-label="Akcje z tekstem">
+              <button class="small-btn primary" id="copyBtn" type="button">Kopiuj</button>
+              <button class="small-btn" id="regenBtn" type="button">Spróbuj inaczej</button>
+              <button class="small-btn" id="waBtn" type="button">WhatsApp</button>
+              <button class="small-btn" id="mailBtn" type="button">E-mail</button>
+            </div>
+            <div class="feedback-widget" id="feedbackWidget">
+              <p>Fachbot ci pomógł?</p>
+              <div class="feedback-btns">
+                <button class="fb-vote" id="voteUp" type="button" aria-label="Ano">👍</button>
+                <button class="fb-vote" id="voteDown" type="button" aria-label="Ne">👎</button>
+              </div>
+              <div class="feedback-comment" id="feedbackComment">
+                <textarea id="feedbackText" placeholder="Napisz nam co można poprawić (opcjonalne)"></textarea>
+                <button class="feedback-send" id="feedbackSend" type="button">Wyślij</button>
+              </div>
+              <div class="feedback-thanks" id="feedbackThanks">Dziękujemy za opinię!</div>
+            </div>
+            <div class="upgrade-hint">
+              <strong>Chcesz PDF?</strong>
+              <span>Czysta oferta z nagłówkiem i pozycjami jest częścią planu Pro.</span>
+              <a href="#pricing" class="upgrade-link">Dowiedz się więcej o Pro →</a>
+            </div>
+          </section>
+        </aside>
+      </div>
+    </section>
+
+    <!-- PDF SEKCJA -->
+    <section class="pdf-section" id="pdf" aria-labelledby="pdf-heading">
+      <div class="wrap pdf-grid">
+        <section class="panel pdf-card">
+          <div class="section-eyebrow">Tylko w planie Pro</div>
+          <h3 id="pdf-heading">Oferta PDF, która przekona klienta</h3>
+          <p class="pdf-muted">Zamiast screenshotu z telefonu wyślesz czysty dokument z logo, pozycjami i łączną ceną. Klient potraktuje to poważnie.</p>
+          <ul class="list">
+            <li>Dla detailingu, serwisu, ofert cenowych i wypożyczalni.</li>
+            <li>Klient dostanie PDF — nie wypunktowania z WhatsAppa.</li>
+            <li>Mniej nieporozumień co do ceny i warunków.</li>
+          </ul>
+          <div style="margin-top:24px">
+            <a href="#pricing" class="primary-btn">Wypróbuj Pro za 10 zł</a>
+          </div>
+        </section>
+
+        <section class="pdf-preview" aria-label="Przykład oferty PDF">
+          <div class="pdf-head">
+            <div class="pdf-brand">
+              <div class="pdf-logo">
+                <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M8 25V7" /><path d="M8 7h15" /><path d="M8 16h10" />
+                  <path d="M17 7h3.3c2.95 0 5.2 2 5.2 4.6 0 2.07-1.42 3.81-3.5 4.48" />
+                  <path d="M17 16h4.1c2.9 0 5.2 1.96 5.2 4.5S24 25 21.1 25H17" />
+                </svg>
+              </div>
+              <div class="pdf-title">
+                <strong>Fachbot oferta</strong>
+                <span>Profesjonalne PDF dla klienta</span>
+              </div>
+            </div>
+            <div class="pdf-meta">
+              <div><strong>Numer oferty:</strong> NB-2026-041</div>
+              <div><strong>Data:</strong> 23. 4. 2026</div>
+              <div><strong>Termin płatności:</strong> 7 dni</div>
+            </div>
+          </div>
+          <div class="pdf-body">
+            <div class="pdf-cols">
+              <div class="pdf-box"><strong>Dostawca</strong>Jan Svoboda Detailing<br>+48 777 123 456<br>Warszawa i okolice<br>info@svobodadetailing.pl</div>
+              <div class="pdf-box"><strong>Odbiorca</strong>Piotr Nowak<br>Škoda Kodiaq<br>+48 777 000 111<br>nowak@email.pl</div>
+            </div>
+            <table class="pdf-table">
+              <thead><tr><th>Pozycja</th><th>Opis</th><th>Cena</th></tr></thead>
+              <tbody>
+                <tr><td>Detailing wnętrza</td><td>Głębokie czyszczenie, odkurzanie, plastiki, szyby</td><td>680 zł</td></tr>
+                <tr><td>Polerowanie lakieru</td><td>Jednokrokowe polerowanie maszynowe</td><td>890 zł</td></tr>
+                <tr><td>Ochrona lakieru</td><td>Sealant na 6 miesięcy</td><td>380 zł</td></tr>
+              </tbody>
+            </table>
+            <div class="pdf-total">
+              <div class="pdf-total-box">
+                <div class="pdf-total-row"><span>Suma częściowa</span><strong>1 950 zł</strong></div>
+                <div class="pdf-total-row"><span>VAT</span><strong>0 zł</strong></div>
+                <div class="pdf-total-row final"><span>Razem</span><strong>1 950 zł</strong></div>
+              </div>
+            </div>
+            <div class="pdf-note">Cena opiera się na aktualnie opisanym stanie pojazdu. Proponuję termin w przyszłym tygodniu.</div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- CENNIK -->
+    <section class="pricing-section section" id="pricing" aria-labelledby="pricing-heading">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="section-eyebrow">Prosty cennik</div>
+            <h2 id="pricing-heading">Zwróci się przy jednym zaoszczędzonym zleceniu</h2>
+            <p>Jedno nieporozumienie w kwestii ceny kosztuje więcej niż miesiąc planu Pro.</p>
+          </div>
+          <p class="pricing-note-top">Bez zobowiązań · anuluj kiedy chcesz</p>
+        </div>
+
+        <!-- Billing toggle -->
+        <div class="billing-toggle" role="group" aria-label="Częstotliwość płatności">
+          <button class="billing-btn active" id="billMonthly" type="button">Miesięcznie</button>
+          <button class="billing-btn" id="billYearly" type="button">Rocznie <span class="billing-badge">−2 miesiące</span></button>
+        </div>
+        <div class="pricing-grid">
+          <article class="panel pricing-card" id="plan-free">
+            <div class="pricing-pill">Za darmo</div>
+            <h3>Free</h3>
+            <p class="pricing-price">0 zł <span class="pricing-per">/ miesiąc</span></p>
+            <p class="pricing-note">Do pierwszego wypróbowania.</p>
+            <ul class="list">
+              <li>Wiadomości na WhatsApp, SMS, e-mail</li>
+              <li>4 sytuacje · 17+ zawodów</li>
+              <li>Wyjścia CZ / SK / PL</li>
+              <li class="list-no">Bez PDF</li>
+              <li class="list-no">Bez zapisanych szablonów</li>
+            </ul>
+            <div class="pricing-cta">
+              <a href="#app" class="ghost-btn">Zacznij za darmo</a>
+            </div>
+          </article>
+
+          <article class="panel pricing-card pricing-featured" id="plan-pro">
+            <div class="pricing-pill">Najpopularniejszy</div>
+            <h3>Pro</h3>
+            <p class="pricing-price">
+              <span class="price-monthly">10 zł <span class="pricing-per">/ miesiąc</span></span>
+              <span class="price-yearly" hidden>99 zł <span class="pricing-per">/ rok</span></span>
+            </p>
+            <p class="pricing-note pricing-note-monthly">Dla rzemieślników, którzy piszą do klientów każdego tygodnia.</p>
+            <p class="pricing-note pricing-note-yearly" hidden>Oszczędzasz 21 zł względem płatności miesięcznych.</p>
+            <ul class="list">
+              <li>Wszystko z Free</li>
+              <li>Profesjonalne oferty PDF</li>
+              <li>Własny podpis i nagłówek</li>
+              <li>Zapisane szablony i historia</li>
+              <li>Priorytetowe wsparcie</li>
+            </ul>
+            <div class="pricing-cta">
+              <a href="#app" class="primary-btn">Wypróbuj Pro</a>
+            </div>
+          </article>
+
+          <article class="panel pricing-card" id="plan-team">
+            <div class="pricing-pill">Dla zespołu</div>
+            <h3>Firma</h3>
+            <p class="pricing-price">Na zapytanie</p>
+            <p class="pricing-note">Wielu użytkowników, wspólne szablony, historia zleceń.</p>
+            <ul class="list">
+              <li>Wielu użytkowników w jednej firmie</li>
+              <li>Wspólne szablony</li>
+              <li>Historia zleceń dla zespołu</li>
+              <li>Faktura na firmę</li>
+            </ul>
+            <div class="pricing-cta">
+              <a href="mailto:info@fachbot.com?subject=Fachbot%20dla%20firmy" class="ghost-btn">Napisz do nas</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="mobile-sticky" aria-hidden="false">
+    <button class="primary-btn" id="mobileGenerateBtn" type="button">Przygotuj tekst</button>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div class="footer-brand">
+        <div class="logo" style="width:32px;height:32px;border-radius:9px">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:20px;height:20px">
+            <path d="M8 25V7"/><path d="M8 7h15"/><path d="M8 16h10"/>
+            <path d="M17 7h3.3c2.95 0 5.2 2 5.2 4.6 0 2.07-1.42 3.81-3.5 4.48"/>
+            <path d="M17 16h4.1c2.9 0 5.2 1.96 5.2 4.5S24 25 21.1 25H17"/>
+          </svg>
+        </div>
+        <span>Fachbot</span>
+      </div>
+      <div class="footer-meta">
+        <span>Operator: Jakub Nowicki · NIP: 09089977 · Návsí 447, 739 92 Návsí</span>
+        <span class="footer-sep">·</span>
+        <a href="mailto:info@fachbot.com">info@fachbot.com</a>
+      </div>
+      <div class="footer-links">
+        <a href="../podminky.html">Regulamin</a>
+        <span>·</span>
+        <a href="../gdpr.html">Ochrona danych osobowych</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- PASEK COOKIE -->
+  <div class="cookie-bar" id="cookieBar" role="alertdialog" aria-label="Informacje o plikach cookie">
+    <div class="cookie-inner">
+      <p>Strona używa tylko niezbędnych technicznych plików cookie i Google Fonts (transfer IP do USA). Nie używamy analitycznych ani reklamowych plików cookie. <a href="../gdpr.html">Więcej informacji</a></p>
+      <button class="primary-btn cookie-ok" id="cookieAccept" type="button">Rozumiem</button>
+    </div>
+  </div>
+</body>
+</html>
