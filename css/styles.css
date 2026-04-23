@@ -42,6 +42,11 @@
 
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
+/* ── SCROLL OFFSET (topbar výška ~64px) ── */
+#app, #pdf, #pricing, #recenze {
+  scroll-margin-top: 72px;
+}
+
 body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
 a{text-decoration:none;color:inherit}
 button,input,textarea,select{font:inherit}
@@ -67,10 +72,17 @@ img,svg{display:block;max-width:100%}
 .top-nav a{padding:6px 12px;border-radius:999px;color:var(--muted);font-weight:500}
 .top-nav a:hover{background:var(--surface-2);color:var(--text)}
 .top-actions{display:flex;align-items:center;gap:8px}
-.lang-switch{display:flex;gap:3px;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+.lang-switch{display:flex;gap:2px;align-items:center}
 .lang-switch button,.theme-btn{border:0;background:transparent;cursor:pointer}
-.lang-switch button, .lang-btn{padding:5px 10px;border-radius:999px;font-weight:700;font-size:12px;color:var(--muted)}
-.lang-switch button.active, .lang-btn.active{background:var(--primary-soft);color:var(--primary)}
+.lang-switch button, .lang-btn{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:6px 10px;border-radius:8px;
+  font-weight:600;font-size:12px;color:var(--muted);
+  text-decoration:none;
+  transition:background .15s,color .15s;
+}
+.lang-switch button:hover, .lang-btn:hover{background:var(--surface-2);color:var(--text)}
+.lang-switch button.active, .lang-btn.active{background:var(--primary-soft);color:var(--primary);font-weight:700}
 .theme-btn{width:36px;height:36px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--text);font-size:15px}
 
 /* ── HERO ── */
@@ -251,7 +263,6 @@ textarea{min-height:96px;resize:vertical}
 }
 
 /* ── LANG SWITCH S VLAJKAMI ── */
-.lang-switch button, .lang-btn{display:flex;align-items:center;gap:5px}
 .flag{font-size:14px;line-height:1}
 .lang-code{font-size:11px;font-weight:700}
 
