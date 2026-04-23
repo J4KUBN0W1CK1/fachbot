@@ -13,7 +13,6 @@
   <meta property="og:description" content="Rychlé zprávy, nabídky, PDF a lepší komunikace se zákazníky pro řemeslníky v CZ / SK / PL." />
   <meta property="og:locale" content="cs_CZ" />
   <meta name="twitter:card" content="summary_large_image" />
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -42,6 +41,486 @@
   <script src="./js/main.js" defer></script>
 </head>
 <body>
-  <!-- SEM přijde celý obsah body z tvého kódu -->
+  <a class="skip-link" href="#app">Přeskočit na hlavní obsah</a>
+
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <div class="brand" aria-label="Fachbot">
+        <div class="logo">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M8 25V7" />
+            <path d="M8 7h15" />
+            <path d="M8 16h10" />
+            <path d="M17 7h3.3c2.95 0 5.2 2 5.2 4.6 0 2.07-1.42 3.81-3.5 4.48" />
+            <path d="M17 16h4.1c2.9 0 5.2 1.96 5.2 4.5S24 25 21.1 25H17" />
+          </svg>
+        </div>
+        <span>Fachbot</span>
+      </div>
+      <nav class="top-nav" aria-label="Hlavní navigace">
+        <a href="#app">Vyzkoušet</a>
+        <a href="#flow">Jak to funguje</a>
+        <a href="#pdf">PDF výstup</a>
+        <a href="#pricing">Ceník</a>
+      </nav>
+      <div class="top-actions">
+        <div class="lang-switch" aria-label="Přepnutí jazyka">
+          <button class="active" type="button">CZ</button>
+          <button type="button">SK</button>
+          <button type="button">PL</button>
+        </div>
+        <button class="theme-btn" id="themeToggle" type="button" aria-label="Přepnout režim">◐</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="wrap hero-grid">
+        <section class="panel hero-copy">
+          <div class="eyebrow">Pro řemeslníky, servis, detailing a půjčovny v CZ / SK / PL</div>
+          <h1 id="hero-heading">Méně psaní. Více hotových zakázek.</h1>
+          <p class="lead">Fachbot z pár bodů připraví zprávu, nabídku nebo PDF. Tak aby to šlo hned poslat přes WhatsApp, SMS nebo e-mail.</p>
+          <p class="sublead">Řemeslník napíše jen to důležité. Zbytek poskládá systém – srozumitelně, česky / slovensky / polsky a vypadá to profesionálně.</p>
+          <div class="hero-cta" style="margin-top:20px">
+            <a href="#app" class="primary-btn">Vyzkoušet hlavní flow</a>
+            <a href="#pricing" class="ghost-btn">Mrknout na ceník</a>
+          </div>
+          <div class="hero-points" aria-label="Hlavní přínosy">
+            <div class="mini">
+              <strong>Místo 10 minut 1 minuta</strong>
+              <span>Hotová odpověď z mobilu dřív, než skončí pauza na kafe.</span>
+            </div>
+            <div class="mini">
+              <strong>Jasno pro zákazníka</strong>
+              <span>Co, kdy, za kolik – bez slohu a bez nedorozumění.</span>
+            </div>
+            <div class="mini">
+              <strong>Vypadáš jako firma</strong>
+              <span>Texty i PDF mají hlavu a patu. I když píšeš ve spěchu z dodávky.</span>
+            </div>
+          </div>
+        </section>
+
+        <aside class="panel hero-side" aria-label="Shrnutí výhod">
+          <div>
+            <h3>Pro koho to je</h3>
+            <div class="proof-item"><strong>Samostatní řemeslníci</strong><span>Instalatéři, elektrikáři, zedníci, podlaháři, montáže.</span></div>
+            <div class="proof-item"><strong>Servis a údržba</strong><span>Autoservis, pneuservis, tepování, čistění, správa objektů.</span></div>
+            <div class="proof-item"><strong>Půjčovny a služby</strong><span>Přívěsné vozíky, nářadí, stroje, detailing a další služby.</span></div>
+          </div>
+          <div class="kpi-row" aria-label="Klíčové parametry">
+            <div class="kpi"><strong>4</strong><span>nejčastější situace řešené na pár kliků</span></div>
+            <div class="kpi"><strong>17+</strong><span>typů profesí a služeb připravených v šablonách</span></div>
+            <div class="kpi"><strong>3</strong><span>jazyky – čeština, slovenština a polština</span></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="trust section-tight" aria-label="Typy zpráv, které Fachbot řeší">
+      <div class="wrap trust-row">
+        <div class="trust-item">Domluva termínu</div>
+        <div class="trust-item">Cenová nabídka</div>
+        <div class="trust-item">Upomínka platby</div>
+        <div class="trust-item">PDF pro zákazníka</div>
+      </div>
+    </section>
+
+    <section class="section" id="app" aria-labelledby="app-heading">
+      <div class="wrap app-grid">
+        <section class="panel builder">
+          <div class="section-head">
+            <div>
+              <div class="section-eyebrow">Vyzkoušej na vlastní zakázce</div>
+              <h2 id="app-heading">Vyber situaci a připrav výstup</h2>
+              <p>Vše důležité máš na jedné stránce. Bez registrace a bez studování návodu – prostě vyplníš pár polí a hned vidíš text.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-label">
+              <div class="step-num">1</div>
+              <div>
+                <h3>Co právě potřebuješ vyřešit</h3>
+                <p>Začni situací, ne formulářem. Fachbot podle ní zvolí vhodný tón.</p>
+              </div>
+            </div>
+            <div class="situation-grid" id="situations">
+              <button class="situation active" data-type="Domluvit termín" type="button">
+                <strong>Domluvit termín</strong>
+                <span>První kontakt, návrh času nebo změna návštěvy.</span>
+              </button>
+              <button class="situation" data-type="Poslat nabídku" type="button">
+                <strong>Poslat nabídku</strong>
+                <span>Krátká a srozumitelná cenová nabídka bez slohu.</span>
+              </button>
+              <button class="situation" data-type="Upřesnit zakázku" type="button">
+                <strong>Upřesnit zakázku</strong>
+                <span>Doptání detailů, fotek, rozsahu nebo stavu zakázky.</span>
+              </button>
+              <button class="situation" data-type="Připomenout platbu" type="button">
+                <strong>Připomenout platbu</strong>
+                <span>Slušná připomínka bez trapného tónu.</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-label">
+              <div class="step-num">2</div>
+              <div>
+                <h3>Jakou profesi nebo službu děláš</h3>
+                <p>Nejen řemeslo. Taky servis, detailing, půjčovna nebo údržba – v CZ / SK / PL.</p>
+              </div>
+            </div>
+            <div class="trade-grid" id="tradeGrid">
+              <button class="trade-pill active" type="button">Instalatér</button>
+              <button class="trade-pill" type="button">Elektrikář</button>
+              <button class="trade-pill" type="button">Truhlář</button>
+              <button class="trade-pill" type="button">Malíř / natěrač</button>
+              <button class="trade-pill" type="button">Topenář / HVAC</button>
+              <button class="trade-pill" type="button">Zedník / rekonstrukce</button>
+              <button class="trade-pill" type="button">Podlahář</button>
+              <button class="trade-pill" type="button">Obkladač</button>
+              <button class="trade-pill" type="button">Zahradník / údržba</button>
+              <button class="trade-pill" type="button">Tepování / čištění</button>
+              <button class="trade-pill" type="button">Půjčovna / pronájem</button>
+              <button class="trade-pill" type="button">Detailing</button>
+              <button class="trade-pill" type="button">Autoservis / pneuservis</button>
+              <button class="trade-pill" type="button">Mytí oken</button>
+              <button class="trade-pill" type="button">Montáže / servis</button>
+              <button class="trade-pill" type="button">Stěhování / vyklízení</button>
+              <button class="trade-pill" type="button">Jiná služba</button>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-label">
+              <div class="step-num">3</div>
+              <div>
+                <h3>Krátce popiš zakázku</h3>
+                <p>Stačí body. Fachbot z toho udělá normální text, který jen pošleš.</p>
+              </div>
+            </div>
+            <div class="field-grid">
+              <div class="field full">
+                <label for="jobDesc">Co potřebuješ se zákazníkem vyřešit</label>
+                <textarea id="jobDesc" placeholder="Např. výměna baterie v koupelně, zkontrolovat sifon, zákazník chce orientační cenu a navrhnout 2 možné termíny."></textarea>
+              </div>
+              <div class="field">
+                <label for="tone">Styl výstupu</label>
+                <select id="tone">
+                  <option>Přirozený a stručný</option>
+                  <option>Více profesionální</option>
+                  <option>Více přátelský</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="channel">Výstup</label>
+                <select id="channel">
+                  <option>WhatsApp zpráva</option>
+                  <option>SMS zpráva</option>
+                  <option>Email</option>
+                  <option>Cenová nabídka</option>
+                  <option>PDF nabídka / faktura</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-label">
+              <div class="step-num">4</div>
+              <div>
+                <h3>Komu to jde</h3>
+                <p>Jen to nejnutnější pro smysluplný výstup.</p>
+              </div>
+            </div>
+            <div class="field-grid">
+              <div class="field">
+                <label for="clientName">Jméno zákazníka</label>
+                <input id="clientName" placeholder="Např. pan Novák">
+              </div>
+              <div class="field">
+                <label for="clientThing">Předmět zakázky</label>
+                <input id="clientThing" placeholder="Např. vozík / koupelna / Škoda Kodiaq">
+              </div>
+              <div class="field">
+                <label for="clientPhone">Telefon</label>
+                <input id="clientPhone" placeholder="+420...">
+              </div>
+              <div class="field">
+                <label for="clientEmail">Email</label>
+                <input id="clientEmail" placeholder="zakaznik@email.cz">
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-label">
+              <div class="step-num">5</div>
+              <div>
+                <h3>Tvoje údaje</h3>
+                <p>Volitelné. Když to vyplníš, Fachbot přidá automaticky podpis a kontakt.</p>
+              </div>
+            </div>
+            <details class="accordion">
+              <summary class="accordion-summary">
+                <strong>Doplnit podpis, firmu a kontakt</strong>
+                <small>Volitelné nastavení, nezabírá místo</small>
+              </summary>
+              <div class="accordion-body">
+                <div class="field-grid">
+                  <div class="field">
+                    <label for="myName">Tvoje jméno</label>
+                    <input id="myName" placeholder="Např. Petr Dvořák">
+                  </div>
+                  <div class="field">
+                    <label for="myCompany">Firma</label>
+                    <input id="myCompany" placeholder="Např. Dvořák Instalatérství">
+                  </div>
+                  <div class="field">
+                    <label for="myPhone">Telefon</label>
+                    <input id="myPhone" placeholder="+420...">
+                  </div>
+                  <div class="field">
+                    <label for="myCity">Město / region</label>
+                    <input id="myCity" placeholder="Např. Třinec a okolí">
+                  </div>
+                </div>
+              </div>
+            </details>
+          </div>
+
+          <div class="cta-row">
+            <button class="primary-btn" id="generateBtn" type="button">Připravit text</button>
+            <button class="ghost-btn" id="resetBtn" type="button">Vyčistit</button>
+          </div>
+        </section>
+
+        <aside class="sidebar" aria-label="Náhled a akce">
+          <section class="panel card">
+            <h3>Náhled výstupu</h3>
+            <div class="result-meta">
+              <div><strong>Situace:</strong> <span id="metaSituation">Domluvit termín</span></div>
+              <div><strong>Výstup:</strong> <span id="metaChannel">WhatsApp zpráva</span></div>
+              <div><strong>Služba:</strong> <span id="metaTrade">Instalatér</span></div>
+            </div>
+            <div class="result-box" id="resultBox">Dobrý den pane Nováku,
+
+ozývám se k vaší poptávce. Mohl bych vám nabídnout termín v úterý odpoledne nebo ve středu dopoledne.
+
+Pokud vám bude jeden z termínů sedět, rovnou ho potvrdíme. Když budete chtít, pošlu i stručnou cenovou nabídku.
+
+Děkuji,</div>
+            <div class="actions" aria-label="Akce s textem">
+              <button class="small-btn primary" id="copyBtn" type="button">Kopírovat</button>
+              <button class="small-btn" id="regenBtn" type="button">Zkusit jinak</button>
+              <button class="small-btn" id="waBtn" type="button">WhatsApp</button>
+              <button class="small-btn" id="mailBtn" type="button">Email</button>
+            </div>
+            <div class="hint">
+              Fachbot má být rychlejší než psát ručně. Náhled proto zůstává pořád po ruce a nepadá pod formulář – ideální na mobilu i notebooku.
+            </div>
+          </section>
+        </aside>
+      </div>
+    </section>
+
+    <section class="flow-section" id="flow" aria-labelledby="flow-heading">
+      <div class="flow-inner section">
+        <div class="section-head">
+          <div>
+            <div class="section-eyebrow">Jak vypadá cesta uživatele</div>
+            <h2 id="flow-heading">Od návštěvy webu až po zaplacené předplatné</h2>
+            <p>Nemusí přemýšlet, co má dělat. Flow je jednoduché: zkusí si zprávu, založí si účet, vybere plán, zaplatí a pokračuje v tom, co dělal.</p>
+          </div>
+        </div>
+        <div class="flow-grid">
+          <article class="flow-card">
+            <div class="flow-badge">1</div>
+            <h3>Návštěvník → rychlé demo</h3>
+            <p>Ze začátku jen přejde na hlavní flow, zkusí jednu zprávu nebo nabídku. Vidí reálný text na svou situaci.</p>
+            <p class="flow-meta">Bez registrace, jen zadá pár bodů a klikne na „Připravit text“.</p>
+          </article>
+          <article class="flow-card">
+            <div class="flow-badge">2</div>
+            <h3>Registrace a první uložené šablony</h3>
+            <p>Když mu dává smysl, může si založit účet. Získá možnost ukládat vlastní podpis, šablony a historii.</p>
+            <p class="flow-meta">Flow: vyplní email → ověření → krátké nastavení profilu.</p>
+          </article>
+          <article class="flow-card">
+            <div class="flow-badge">3</div>
+            <h3>Výběr předplatného a platba</h3>
+            <p>Vybere plán (Free / Pro / Firma), zaplatí kartou a hned pokračuje v rozdělané zprávě nebo PDF.</p>
+            <p class="flow-meta">Platba nezastaví práci – po úspěšné úhradě skočí rovnou zpět do aplikace.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="pdf-section" id="pdf" aria-labelledby="pdf-heading">
+      <div class="wrap pdf-grid">
+        <section class="panel pdf-card">
+          <div class="section-eyebrow">Prémiová funkce v Pro tarifu</div>
+          <h3 id="pdf-heading">Prémiový PDF výstup, který se dá rovnou poslat</h3>
+          <p class="pdf-muted">Tohle je funkce, kvůli které si to živnostník nebo malá firma zaplatí. Z několika bodů vznikne čistá nabídka nebo dokument, který jde rovnou poslat zákazníkovi a vypadá důvěryhodně.</p>
+          <ul class="list">
+            <li>Ideální pro cenové nabídky, servisní zásahy, detailing i půjčovnu.</li>
+            <li>Zvyšuje důvěru a snižuje improvizaci při posílání cen a podmínek.</li>
+            <li>Jasný důvod pro prémiový tarif – není to jen „AI text“, ale hotový dokument.</li>
+          </ul>
+        </section>
+
+        <section class="pdf-preview" aria-label="Ukázka PDF nabídky">
+          <div class="pdf-head">
+            <div class="pdf-brand">
+              <div class="pdf-logo">
+                <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M8 25V7" />
+                  <path d="M8 7h15" />
+                  <path d="M8 16h10" />
+                  <path d="M17 7h3.3c2.95 0 5.2 2 5.2 4.6 0 2.07-1.42 3.81-3.5 4.48" />
+                  <path d="M17 16h4.1c2.9 0 5.2 1.96 5.2 4.5S24 25 21.1 25H17" />
+                </svg>
+              </div>
+              <div class="pdf-title">
+                <strong>Fachbot nabídka</strong>
+                <span>Profesionální PDF pro zákazníka</span>
+              </div>
+            </div>
+            <div class="pdf-meta">
+              <div><strong>Číslo nabídky:</strong> NB-2026-041</div>
+              <div><strong>Datum:</strong> 23. 4. 2026</div>
+              <div><strong>Splatnost:</strong> 7 dní</div>
+            </div>
+          </div>
+          <div class="pdf-body">
+            <div class="pdf-cols">
+              <div class="pdf-box">
+                <strong>Dodavatel</strong>
+                Jan Svoboda Detailing<br>
+                +420 777 123 456<br>
+                Třinec a okolí<br>
+                info@svobodadetailing.cz
+              </div>
+              <div class="pdf-box">
+                <strong>Odběratel</strong>
+                Petr Novák<br>
+                Škoda Kodiaq<br>
+                +420 777 000 111<br>
+                novak@email.cz
+              </div>
+            </div>
+            <table class="pdf-table">
+              <thead>
+                <tr><th>Položka</th><th>Popis</th><th>Cena</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Detailing interiéru</td><td>Hloubkové čištění interiéru, vysávání, plasty, skla</td><td>2 900 Kč</td></tr>
+                <tr><td>Leštění laku</td><td>Jednokrokové strojní leštění a oživení laku</td><td>3 800 Kč</td></tr>
+                <tr><td>Ochrana laku</td><td>Sealant / ochranná vrstva na 6 měsíců</td><td>1 600 Kč</td></tr>
+              </tbody>
+            </table>
+            <div class="pdf-total">
+              <div class="pdf-total-box">
+                <div class="pdf-total-row"><span>Mezisoučet</span><strong>8 300 Kč</strong></div>
+                <div class="pdf-total-row"><span>DPH</span><strong>0 Kč</strong></div>
+                <div class="pdf-total-row final"><span>Celkem</span><strong>8 300 Kč</strong></div>
+              </div>
+            </div>
+            <div class="pdf-note">
+              Poznámka: Cena vychází z aktuálně popsaného stavu vozu a může se upravit podle finální prohlídky. Termín realizace navrhuji příští týden podle domluvy.
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="seo section" aria-labelledby="seo-heading">
+      <div class="wrap seo-grid">
+        <article class="panel seo-card">
+          <h3 id="seo-heading">Co funguje pro konverzi</h3>
+          <p>Jedna silná homepage stačí k pochopení: co Fachbot dělá, pro koho je a jak šetří čas. Zbytek řeší jednoduché kroky v aplikaci.</p>
+        </article>
+        <article class="panel seo-card">
+          <h3>Co funguje pro SEO</h3>
+          <p>Homepage je základ. K tomu později přidáš samostatné stránky podle use-case a jazyka: nabídky, upomínky, WhatsApp zprávy, faktury, půjčovna, detailing.</p>
+        </article>
+        <article class="panel seo-card">
+          <h3>Co funguje pro produkt</h3>
+          <p>Nejdřív rychlé texty a PDF. Pak teprve další vrstvy jako fotky, poznámky, historie zakázek a fakturace. Reálný vývoj místo těžkého systému od prvního dne.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="pricing-section section" id="pricing" aria-labelledby="pricing-heading">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="section-eyebrow">Jednoduchý ceník bez háčků</div>
+            <h2 id="pricing-heading">Fachbot se ti zaplatí jednou ušetřenou zakázkou</h2>
+            <p>Stačí pár ušetřených telefonátů nebo nedorozumění měsíčně a máš tarif zaplacený. Všechno přehledně, v CZ / SK / PL a bez složité administrativy.</p>
+          </div>
+          <div>
+            <div class="pricing-pill">Bez závazků</div>
+            <p class="pricing-note">Můžeš kdykoli přejít mezi plány nebo zrušit.</p>
+          </div>
+        </div>
+        <div class="pricing-grid">
+          <article class="panel pricing-card" id="plan-free">
+            <div class="pricing-pill">Začátek</div>
+            <h3>Free</h3>
+            <p class="pricing-price">0 Kč / měsíc</p>
+            <p class="pricing-note">Na rychlé vyzkoušení během dne.</p>
+            <ul class="list">
+              <li>Základní zprávy (WhatsApp, SMS, email)</li>
+              <li>Předpřipravené situace a profese</li>
+              <li>Bez PDF výstupů a ukládání historie</li>
+            </ul>
+            <div class="pricing-cta" style="margin-top:14px">
+              <a href="#app" class="ghost-btn">Začít zdarma</a>
+            </div>
+          </article>
+
+          <article class="panel pricing-card pricing-featured" id="plan-pro">
+            <div class="pricing-pill">Pro jednotlivce a malé firmy</div>
+            <h3>Pro</h3>
+            <p class="pricing-price">cca 250–350 Kč / měsíc</p>
+            <p class="pricing-note">Ideální pro řemeslníky, servis a půjčovny, které píšou klientům každý týden.</p>
+            <ul class="list">
+              <li>Vše z Free – zprávy, nabídky a upomínky</li>
+              <li>Prémiové PDF nabídky a dokumenty</li>
+              <li>Vlastní podpis, firma, barvy a styl</li>
+              <li>Uložené šablony a historie zakázek</li>
+            </ul>
+            <div class="pricing-cta" style="margin-top:14px">
+              <a href="#app" class="primary-btn">Vyzkoušet a pak přejít na Pro</a>
+            </div>
+          </article>
+
+          <article class="panel pricing-card" id="plan-team">
+            <div class="pricing-pill">Pro tým</div>
+            <h3>Firma</h3>
+            <p class="pricing-price">na míru</p>
+            <p class="pricing-note">Pro více lidí a větší počet zakázek.</p>
+            <ul class="list">
+              <li>Více uživatelů v jedné firmě</li>
+              <li>Sdílené šablony a nastavení</li>
+              <li>Historie a přehled zakázek pro celý tým</li>
+            </ul>
+            <div class="pricing-cta" style="margin-top:14px">
+              <a href="mailto:info@fachbot.cz?subject=Fachbot%20pro%20firmu" class="ghost-btn">Domluvit firemní plán</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="mobile-sticky" aria-hidden="false">
+    <button class="primary-btn" id="mobileGenerateBtn" type="button">Připravit text</button>
+  </div>
 </body>
 </html>
